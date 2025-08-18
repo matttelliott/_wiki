@@ -1,0 +1,57 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Sync and temp files
+.sync/
+*.tmp
+*.swp
+*~
+*.lock
+
+# Obsidian workspace files (keep settings)
+.obsidian/workspace*
+.obsidian/cache
+.obsidian/plugins/*/data.json
+.trash/
+
+# Google Drive specific files
+.tmp.drivedownload/
+.tmp.driveupload/
+Icon
+*.driveupload
+*.drivedownload
+.driveignore
+Google Drive - *
+*.gdoc
+*.gsheet
+*.gslides
+*.gdraw
+
+# iCloud specific files
+.icloud
+*.icloud
+.DocumentRevisions-V100/
+.TemporaryItems/
+.Trashes/
+
+# Conflict files
+*.conflict
+*.local-version
+*.icloud-version
+*.orig
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Log files
+*.log
+logs/
+
+# Backup files
+*.backup
+*.bak
+.saves/

@@ -1,0 +1,20 @@
+# Google Drive ignore file
+# Only sync actual wiki content, nothing else
+
+# Git repository - NEVER sync
+.git/
+
+# Sync system
+.sync/
+
+# Obsidian config
+.obsidian/
+
+# System files
+.DS_Store
+
+# Claude config
+.claude/
+
+# All hidden files/folders except the ones above
+.*
