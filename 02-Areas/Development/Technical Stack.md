@@ -68,11 +68,6 @@ tags: [development, tools, stack, ai-reference]
 - **Tools:** [List any monitoring tools]
 - **Approach:** [How you handle logs/metrics]
 
-## Mobile Development
-### iOS
-- **Language:** Swift, SwiftUI
-- **Tools:** Xcode, TestFlight
-- **Focus:** Productivity and utility apps
 
 ## Documentation Tools
 ### Knowledge Management
@@ -84,23 +79,22 @@ tags: [development, tools, stack, ai-reference]
 - **Tools:** [Swagger/Postman/etc]
 
 ## Security Tools
-- **Password Manager:** [1Password/Bitwarden/etc]
+- **Password Manager:** [1Password]
 - **2FA:** [Approach and tools]
 - **Secrets Management:** [How you handle API keys, etc]
 
 ## Preferred Libraries/Frameworks
 ### Frontend
-- **React:** [If used]
-- **Vue:** [If used]
-- **Others:** [List preferences]
+- **Angular:** [First choice]
+- **Svelte:** [Used at work]
+- **Others:** [Tailwind with DaisyUI, Bootstrap]
 
 ### Backend
-- **Node.js:** [Express/Fastify/etc]
-- **Python:** [FastAPI/Django/Flask]
-- **Others:** [List preferences]
+- **Node.js:** [NestJS]
+- **Python:** [Django]
 
 ## Database Preferences
-- **SQL:** [PostgreSQL/MySQL/SQLite]
+- **SQL:** [PostgreSQL/SQLite]
 - **NoSQL:** [MongoDB/Redis/etc]
 - **ORMs:** [Prisma/SQLAlchemy/etc]
 

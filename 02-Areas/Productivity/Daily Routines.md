@@ -9,7 +9,7 @@ tags: [productivity, routines, habits, ai-reference]
 
 ## Morning Routine
 ### Ideal Start
-1. **Wake:** [Target time]
+1. **Wake:** [8am]
 2. **Hydrate:** Water before coffee
 3. **Review:** Check calendar and priorities
 4. **Plan:** Open daily note, set 3 main tasks
