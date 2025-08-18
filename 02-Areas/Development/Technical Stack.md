@@ -9,14 +9,12 @@ tags: [development, tools, stack, ai-reference]
 
 ## Programming Languages
 ### Primary
-- **JavaScript/TypeScript:** [Proficiency level, typical use cases]
-- **Python:** [Proficiency level, typical use cases]
-- **Swift:** iOS development, particularly productivity apps
-- **[Other]:** [Details]
+- **JavaScript/TypeScript:** [Expert, go-to tool for most projects]
+- **Python:** [Enough to get by, use when practical]
 
 ### Secondary
-- **Rust:** [Learning/exploring for...]
-- **Go:** [Use cases]
+- **Rust:** [Learning/exploring for personal reasons]
+- **Go:** [Learning/exploring for professional reasons]
 - **Shell scripting:** Automation and system configuration
 
 ## Development Environment
@@ -29,7 +27,7 @@ tags: [development, tools, stack, ai-reference]
 ### Terminal Setup
 - **Shell:** [zsh with oh-my-zsh/starship/etc]
 - **Multiplexer:** tmux with custom configuration
-- **Terminal Emulator:** [Alacritty/iTerm2/WezTerm]
+- **Terminal Emulator:** [iTerm2]
 
 ## Key Tools
 ### CLI Essentials
@@ -48,7 +46,6 @@ tags: [development, tools, stack, ai-reference]
 ## AI & Automation
 ### AI Tools
 - **Claude:** Primary AI assistant via CLI and web
-- **GitHub Copilot:** IDE integration
 - **Local LLMs:** Ollama for offline work
 - **[Others]:** [Any other AI tools]
 
@@ -60,7 +57,7 @@ tags: [development, tools, stack, ai-reference]
 
 ## Infrastructure
 ### Cloud Platforms
-- **Primary:** [AWS/GCP/Azure/etc]
+- **Primary:** [GCP]
 - **Services Used:** [List key services]
 
 ### Version Control
