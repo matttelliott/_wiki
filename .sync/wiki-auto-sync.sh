@@ -13,7 +13,9 @@ CONFLICT_FLAG="$WIKI_DIR/.sync/.conflict"
 mkdir -p "$WIKI_DIR/.sync"
 
 # Detect platform
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$WIKI_DIR" == *"iCloud~md~obsidian"* ]]; then
+    PLATFORM="icloud"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
     PLATFORM="macos"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     PLATFORM="linux"
