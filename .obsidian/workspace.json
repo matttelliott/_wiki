@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-Projects/_Active/Personal Wiki System Evolution.md",
+                "file": "02-Areas/Personal/About Me.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Personal Wiki System Evolution"
+              "title": "About Me"
             }
           }
         ]
@@ -171,8 +171,14 @@
   },
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
-    "01-Projects/_Active/Claude Mastery.md",
+    "02-Areas/Personal/Writing Style Guide.md",
+    "02-Areas/Personal/Writing Style Guide.md.tmp.30765.1755501872800",
+    "02-Areas/Development/Technical Stack.md",
+    "02-Areas/Development/Technical Stack.md.tmp.30765.1755501844178",
+    "02-Areas/Development",
     "01-Projects/_Active/Personal Wiki System Evolution.md",
+    "02-Areas/Personal/About Me.md",
+    "01-Projects/_Active/Claude Mastery.md",
     "01-Projects/_Active/iPhone Pomodoro Timer.md",
     "01-Projects/_Active/AI-Centered Dotfiles.md",
     "_System/Sync Architecture.md",
@@ -195,9 +201,6 @@
     "05-Templates",
     "04-Daily",
     "03-Resources/References",
-    "03-Resources/Literature",
-    "03-Resources/Archives",
-    "03-Resources",
-    "02-Areas/Professional"
+    "03-Resources/Literature"
   ]
 }
