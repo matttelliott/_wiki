@@ -89,7 +89,7 @@ if [ ! -d .git ]; then
 EOF
     
     git add .
-    git commit -m "Initial commit of wiki"
+    git -c commit.gpgsign=false commit -m "Initial commit of wiki"
 fi
 
 # Check if remote is configured
@@ -133,7 +133,7 @@ EOF
         
         # Check if all conflicts were auto-resolved
         if [ -z "$(git diff --name-only --diff-filter=U)" ]; then
-            git commit -m "Auto-resolved conflicts in system files"
+            git -c commit.gpgsign=false commit -m "Auto-resolved conflicts in system files"
             rm -f "$CONFLICT_FLAG"
             log_message "All conflicts auto-resolved"
         else
@@ -206,7 +206,7 @@ if ! git diff --staged --quiet; then
     # Commit with timestamp and platform
     COMMIT_MSG="Auto-sync from $PLATFORM: $(date '+%Y-%m-%d %H:%M:%S')"
     
-    if git commit -m "$COMMIT_MSG" --quiet; then
+    if git -c commit.gpgsign=false commit -m "$COMMIT_MSG" --quiet; then
         log_message "Committed changes: $COMMIT_MSG"
         
         # Push if remote exists
