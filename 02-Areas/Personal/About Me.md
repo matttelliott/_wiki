@@ -28,7 +28,7 @@ tags: [personal, context, ai-reference]
 ## Communication Preferences
 - **Writing Style:** Direct, concise, technical when appropriate
 - **Documentation:** Prefer comprehensive READMEs and inline comments
-- **Collaboration:** [Async/sync preference]
+- **Collaboration:** [task dependant]
 
 ## Learning Style
 - **Approach:** Hands-on experimentation, then deep documentation
@@ -38,7 +38,7 @@ tags: [personal, context, ai-reference]
 ## Personal Interests
 - **Technology:** AI/ML, automation, productivity tools
 - **Hobbies:** [Professional Wrestling, Cats, Bikes]
-- **Reading:** [Technical books, blogs, newsletters you follow]
+- **Reading:** [hackernew]
 
 ## Current Focus Areas
 - Mastering Claude and AI-assisted development

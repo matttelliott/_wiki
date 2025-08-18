@@ -34,7 +34,7 @@ tags: [personal, goals, values, ai-reference]
 - [ ] Strengthen knowledge management habits
 
 ### Career
-- [ ] [Specific career goals]
+- [ ] [get promoted to FTE at ESPN]
 - [ ] Build strong professional network
 - [ ] Create valuable open source portfolio
 - [ ] Develop thought leadership in AI+Dev space
@@ -44,13 +44,13 @@ tags: [personal, goals, values, ai-reference]
 - Recognized expertise in AI-augmented development
 - Portfolio of successful projects and products
 - Strong presence in developer community
-- [Other long-term professional goals]
+- [Master AI workflows to move from frontend to fullstack engineer]
 
 ### Personal
 - Fully integrated second brain system
 - Location-independent work capability
 - Strong meditation and exercise habits
-- [Other personal aspirations]
+- [Lose 30 lbs]
 
 ## Decision Principles
 When making decisions, prioritize:
