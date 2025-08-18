@@ -172,12 +172,16 @@
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
     "02-Areas/Personal/Writing Style Guide.md",
+    "02-Areas/Personal/Goals and Values.md",
+    "02-Areas/Personal/About Me.md",
+    "02-Areas/Development/Coding Standards.md",
+    "02-Areas/Productivity/Daily Routines.md",
+    "02-Areas/Productivity",
     "02-Areas/Personal/Writing Style Guide.md.tmp.30765.1755501872800",
     "02-Areas/Development/Technical Stack.md",
     "02-Areas/Development/Technical Stack.md.tmp.30765.1755501844178",
     "02-Areas/Development",
     "01-Projects/_Active/Personal Wiki System Evolution.md",
-    "02-Areas/Personal/About Me.md",
     "01-Projects/_Active/Claude Mastery.md",
     "01-Projects/_Active/iPhone Pomodoro Timer.md",
     "01-Projects/_Active/AI-Centered Dotfiles.md",
@@ -200,7 +204,6 @@
     "06-Attachments",
     "05-Templates",
     "04-Daily",
-    "03-Resources/References",
-    "03-Resources/Literature"
+    "03-Resources/References"
   ]
 }

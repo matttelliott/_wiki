@@ -11,17 +11,17 @@ tags: [personal, context, ai-reference]
 - **Current Role:** [Software Engineer]
 - **Industry:** [Sports Media]
 - **Years of Experience:** [10]
-- **Specializations:** [Frontend Development]
+- **Specializations:** [Frontend Development, Typescript]
 
 ## Technical Preferences
 - **Primary OS:** macOS (development), Linux (servers)
 - **Preferred Editor:** Neovim, VS Code for certain tasks
-- **Terminal:** [zsh/bash preference]
-- **Version Control:** Git with [GitHub/GitLab/etc]
+- **Terminal:** [zsh]
+- **Version Control:** Git
 
 ## Work Style
-- **Peak Hours:** [When you're most productive]
-- **Deep Work Blocks:** [Preferred duration]
+- **Peak Hours:** [evenings]
+- **Deep Work Blocks:** [2-4 hours, sometimes whole days]
 - **Break Style:** Pomodoro technique enthusiast
 - **Organization Method:** GTD (Getting Things Done)
 
@@ -37,7 +37,7 @@ tags: [personal, context, ai-reference]
 
 ## Personal Interests
 - **Technology:** AI/ML, automation, productivity tools
-- **Hobbies:** [List relevant hobbies]
+- **Hobbies:** [Professional Wrestling, Cats, Bikes]
 - **Reading:** [Technical books, blogs, newsletters you follow]
 
 ## Current Focus Areas
