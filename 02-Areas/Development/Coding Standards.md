@@ -20,7 +20,7 @@ tags: [development, standards, code-style, ai-reference]
 - **Constants:** UPPER_SNAKE_CASE
 - **Functions:** Verb phrases (getUserData, calculateTotal)
 - **Classes:** PascalCase, noun phrases
-- **Files:** kebab-case for most, PascalCase for components
+- **Files:** kebab-case
 
 ### Comment Philosophy
 - Code should be self-documenting when possible
@@ -56,13 +56,6 @@ function processOrder(order) {
 - Dataclasses over dictionaries for structured data
 - List comprehensions for simple transformations
 - Context managers for resource handling
-
-### Swift
-- SwiftUI over UIKit for new projects
-- Combine for reactive patterns
-- Guard for early returns
-- Extensions for organization
-- Protocol-oriented design
 
 ## Project Structure
 ### Typical Organization
