@@ -49,9 +49,14 @@ echo "Sync Services:"
 if [ "$PLATFORM" = "macOS" ]; then
     # Check launchd services
     if launchctl list | grep -q "com.user.wiki-sync"; then
-        echo "  ✓ Auto-sync service is running"
+        echo "  ✓ Auto-sync service is running (local)"
     else
-        echo "  ✗ Auto-sync service is not running"
+        echo "  ✗ Auto-sync service is not running (local)"
+    fi
+    if launchctl list | grep -q "com.user.wiki-sync-icloud"; then
+        echo "  ✓ Auto-sync service is running (iCloud)"
+    else
+        echo "  ✗ Auto-sync service is not running (iCloud)"
     fi
 elif [ "$PLATFORM" = "Linux" ]; then
     # Check systemd services
