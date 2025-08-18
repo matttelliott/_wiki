@@ -1,0 +1,15 @@
+[Unit]
+Description=Wiki Auto-Sync Service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/%u/_wiki/.sync/wiki-auto-sync.sh
+WorkingDirectory=/home/%u/_wiki
+StandardOutput=journal
+StandardError=journal
+Environment="HOME=/home/%u"
+Environment="USER=%u"
+
+[Install]
+WantedBy=default.target

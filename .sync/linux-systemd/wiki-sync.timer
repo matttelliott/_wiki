@@ -1,0 +1,11 @@
+[Unit]
+Description=Wiki Auto-Sync Timer
+Requires=wiki-sync.service
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

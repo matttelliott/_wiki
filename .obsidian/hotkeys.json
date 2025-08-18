@@ -1,0 +1,38 @@
+{
+  "editor:toggle-checklist": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "C"
+    }
+  ],
+  "daily-notes": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "D"
+    }
+  ],
+  "command-palette:open": [
+    {
+      "modifiers": ["Mod"],
+      "key": "P"
+    }
+  ],
+  "switcher:open": [
+    {
+      "modifiers": ["Mod"],
+      "key": "O"
+    }
+  ],
+  "global-search:open": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "F"
+    }
+  ],
+  "file-explorer:new-file": [
+    {
+      "modifiers": ["Mod"],
+      "key": "N"
+    }
+  ]
+}
