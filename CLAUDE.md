@@ -1,1 +1,2 @@
 - make sure all files in the wiki are in lower-kebab-case and update all links
+- make sure all files and folders are in lower-kebab-case
