@@ -115,3 +115,36 @@ To generate status for another Claude:
 2. Format using standard status report structure
 3. Include confidence levels for each item
 4. Note any uncertainties or conflicts
+
+## Critical Wiki Sync Information
+
+### Repository Setup
+This wiki uses a complex multi-repository sync system. There are THREE separate git repositories:
+1. **Local**: `~/_wiki` (primary working copy)
+2. **iCloud**: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki` (for iOS)
+3. **GitHub**: `git@github.com:matttelliott/_wiki.git` (central hub)
+
+**IMPORTANT**: iCloud location is a SEPARATE CLONE, not a symlink!
+
+### Auto-Sync Configuration
+- Commits run automatically every 5 minutes
+- Commit signing is DISABLED for auto-commits: `git -c commit.gpgsign=false commit`
+- SSH authentication via 1Password agent
+- Each platform identifies itself in commits (macos/icloud/linux)
+
+### File Exclusions
+- `.gitignore` keeps Google Drive files out of git
+- `.gignore` keeps `.git/` folder out of Google Drive
+- This separation is CRITICAL for proper operation
+
+### Troubleshooting Sync Issues
+If you see sync failures:
+1. Check `_System/Sync Architecture.md` for complete details
+2. Run `~/_wiki/.sync/sync-status.sh` to diagnose
+3. Check logs at `~/_wiki/.sync/sync.log`
+4. Network issues auto-retry every 5 minutes
+
+### For Manual Operations
+- Changes commit automatically - wait 5 minutes or run: `~/_wiki/.sync/wiki-auto-sync.sh`
+- To force sync: `git pull origin main && git push origin main`
+- Status updates between Claudes: Use `_System/Claude Sync Protocol.md`
