@@ -3,8 +3,16 @@
 Thumbs.db
 desktop.ini
 
-# Sync and temp files
-.sync/
+# Sync log files only (keep scripts!)
+.sync/*.log
+.sync/.sync.lock
+.sync/.conflict
+.sync/notifications.log
+.sync/sync-stdout.log
+.sync/sync-stderr.log
+.sync/sync-all.log
+
+# Temp files
 *.tmp
 *.swp
 *~
