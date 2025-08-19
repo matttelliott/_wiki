@@ -72,32 +72,43 @@ Icon
 
 ## Auto-Sync Script Details
 
-### Available Scripts
-1. **`wiki-auto-sync.sh`** - Original script (pulls before committing - can lose iPhone changes)
-2. **`wiki-auto-sync-improved.sh`** - Improved script (commits BEFORE pulling - preserves iPhone changes)
-3. **`wiki-auto-sync-icloud.sh`** - iCloud-optimized script (reads files to trigger downloads, then commits before pulling)
-4. **`wiki-sync-all.sh`** - Wrapper that syncs both local and iCloud repos using appropriate scripts
+### Current Scripts (Simplified)
+
+#### Core Script: `wiki-sync.sh`
+- **Why it exists**: We need separate git repositories for local and iCloud (iCloud doesn't support symlinks), but they share identical sync logic
+- **Why single repo**: Accepts `WIKI_DIR` parameter so one script can handle any repository location
+- **Why iCloud detection**: iCloud requires files to be read before it downloads pending changes from iPhone
+- **Why commit-first**: Prevents iPhone edits from being lost when git stashes uncommitted changes during pull
+
+#### Wrapper Script: `wiki-sync-all.sh`  
+- **Why it exists**: Both repositories must sync to GitHub independently, but launchd can only run one command
+- **Why wrapper pattern**: Simpler than configuring multiple launchd services or complex shell commands
+- **Why both repos**: Local repo for fast access, iCloud repo for iPhone Obsidian compatibility
+
+#### Helper Scripts
+- **`setup-sync.sh`** - Initial setup for sync services
+- **`sync-status.sh`** - Check sync status and recent activity
 
 ### Key Features
 - Platform detection via `WIKI_DIR` path and `OSTYPE`
 - Commits WITHOUT signing: `git -c commit.gpgsign=false commit`
 - Desktop notifications for manual conflicts
 - Log files excluded from git to prevent conflicts
-- **iCloud file reading**: iCloud script reads all markdown files to trigger cloud downloads
+- **iCloud file reading**: Automatically reads files when syncing iCloud repos
 
-### Sync Flow (Improved Version)
+### Sync Flow (Unified Script)
 1. Check for lock file (prevent concurrent runs)
 2. Initialize git if needed
-3. **For iCloud**: Read all markdown files to trigger iCloud downloads
+3. **If iCloud repo**: Read all markdown files to trigger downloads
 4. **COMMIT local changes first** (preserves iPhone edits!)
 5. Fetch and check remote status
 6. Pull/merge/rebase as needed
 7. Push to remote
 8. Handle conflicts if they arise
 
-**CRITICAL**: The improved scripts commit BEFORE pulling. This prevents iPhone changes from being lost in stash.
+**CRITICAL**: Always commits BEFORE pulling to prevent iPhone changes from being lost.
 
-**iCloud Note**: macOS requires files to be read to trigger iCloud to download pending changes from iPhone. The iCloud-optimized script handles this automatically.
+**iCloud Note**: The script automatically detects iCloud repos and reads files to trigger downloads.
 
 ## Services Configuration
 

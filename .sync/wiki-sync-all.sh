@@ -1,7 +1,19 @@
 #!/bin/bash
 
-# Wiki Sync All - Syncs both local and iCloud wiki repositories
-# Uses the unified wiki-sync.sh script for both locations
+# wiki-sync-all.sh - Wrapper Script to Sync Multiple Repositories
+#
+# WHY THIS SCRIPT EXISTS:
+# - We maintain TWO separate git repos (local and iCloud) that both sync to GitHub
+# - launchd can only run one command per service, not multiple
+# - This wrapper calls wiki-sync.sh twice with different WIKI_DIR values
+# - Simpler than managing multiple launchd services or complex shell commands
+#
+# WHAT IT DOES:
+#   1. Syncs local repo (~/_wiki) for fast local access
+#   2. Syncs iCloud repo for iPhone Obsidian compatibility
+#
+# CALLED BY:
+#   launchd service (com.user.wiki-sync) every 5 minutes
 
 # Configuration - modify these if your paths are different
 LOCAL_WIKI="${LOCAL_WIKI:-$HOME/_wiki}"

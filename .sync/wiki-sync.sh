@@ -1,8 +1,18 @@
 #!/bin/bash
 
-# Unified Wiki Auto-Sync Script
-# Intelligently handles both local and iCloud repositories
-# Commits BEFORE pulling to preserve all changes (especially from iPhone)
+# wiki-sync.sh - Core Sync Script for a Single Repository
+# 
+# WHY THIS SCRIPT EXISTS:
+# - Syncs ONE git repository at a time (specified by WIKI_DIR environment variable)
+# - Reusable for any repository location (local, iCloud, or future locations)
+# - Handles iCloud's quirk where files must be read to trigger cloud downloads
+# - Commits BEFORE pulling to prevent iPhone edits from being lost
+#
+# USAGE:
+#   WIKI_DIR="/path/to/repo" /bin/bash wiki-sync.sh
+#
+# CALLED BY:
+#   wiki-sync-all.sh (wrapper that syncs multiple repos)
 
 WIKI_DIR="${WIKI_DIR:-$HOME/_wiki}"
 SYNC_LOG="$WIKI_DIR/.sync/sync.log"
