@@ -17,27 +17,32 @@ log_message() {
 log_message "Starting sync for all wiki locations"
 
 # Sync local wiki
-if [ -d "$LOCAL_WIKI" ] && [ -f "$LOCAL_WIKI/.sync/wiki-auto-sync.sh" ]; then
+if [ -d "$LOCAL_WIKI" ] && [ -f "$LOCAL_WIKI/.sync/wiki-auto-sync-improved.sh" ]; then
     log_message "Syncing local wiki at $LOCAL_WIKI"
     cd "$LOCAL_WIKI" || {
         log_message "ERROR: Cannot cd to $LOCAL_WIKI"
         exit 1
     }
-    WIKI_DIR="$LOCAL_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-auto-sync.sh"
+    WIKI_DIR="$LOCAL_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-auto-sync-improved.sh"
     log_message "Local wiki sync complete"
 else
-    log_message "WARNING: Local wiki not found at $LOCAL_WIKI"
+    log_message "WARNING: Local wiki not found or sync script missing at $LOCAL_WIKI"
 fi
 
-# Sync iCloud wiki
-if [ -d "$ICLOUD_WIKI" ] && [ -f "$ICLOUD_WIKI/.sync/wiki-auto-sync.sh" ]; then
-    log_message "Syncing iCloud wiki at $ICLOUD_WIKI"
-    cd "$ICLOUD_WIKI" || {
-        log_message "ERROR: Cannot cd to $ICLOUD_WIKI"
-        exit 1
-    }
-    WIKI_DIR="$ICLOUD_WIKI" /bin/bash "$ICLOUD_WIKI/.sync/wiki-auto-sync.sh"
-    log_message "iCloud wiki sync complete"
+# Sync iCloud wiki (using iCloud-optimized script that reads files first)
+if [ -d "$ICLOUD_WIKI" ]; then
+    # Use the iCloud-optimized script from the main wiki location
+    if [ -f "$LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh" ]; then
+        log_message "Syncing iCloud wiki at $ICLOUD_WIKI (with file reading)"
+        cd "$ICLOUD_WIKI" || {
+            log_message "ERROR: Cannot cd to $ICLOUD_WIKI"
+            exit 1
+        }
+        WIKI_DIR="$ICLOUD_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh"
+        log_message "iCloud wiki sync complete"
+    else
+        log_message "WARNING: iCloud sync script not found at $LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh"
+    fi
 else
     log_message "WARNING: iCloud wiki not found at $ICLOUD_WIKI"
 fi
