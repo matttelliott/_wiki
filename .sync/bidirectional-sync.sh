@@ -17,7 +17,7 @@
 # Paths
 LOCAL_WIKI="$HOME/_wiki"
 ICLOUD_WIKI="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki"
-AUTO_SYNC="$LOCAL_WIKI/.sync/auto-sync.sh"
+AUTO_SYNC="$LOCAL_WIKI/.sync/auto-sync-with-conflicts.sh"
 LOG_FILE="$LOCAL_WIKI/.sync/bidirectional.log"
 
 # Logging
