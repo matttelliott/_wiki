@@ -171,6 +171,7 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "_system/sync-edge-cases-and-testing.md",
     "03-resources/references/claude-desktop.md",
     "03-resources/references/claude-code-interfaces.md",
     "03-resources/references/claude-cli.md",
@@ -205,7 +206,6 @@
     "02-areas/productivity/daily-routines.md",
     "02-areas/personal/writing-style-guide.md",
     "02-areas/personal/things-i-don't-hate.md",
-    "02-areas/personal/john-and-sara-wedding.md",
-    "02-areas/personal/goals-and-values.md"
+    "02-areas/personal/john-and-sara-wedding.md"
   ]
 }
