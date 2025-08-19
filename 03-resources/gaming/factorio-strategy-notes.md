@@ -20,5 +20,8 @@ Tags: #gaming #factorio #strategy #reference
 
 ## Lessons Learned
 
+## Mods & Resources
+- Factorio mods video: https://www.youtube.com/watch?v=964Uh-XAIyI
+
 ---
 *Personal strategy notes for future playthroughs*
