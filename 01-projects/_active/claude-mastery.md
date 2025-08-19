@@ -44,6 +44,7 @@ A comprehensive Claude ecosystem with production-ready configurations, custom ag
 - Create training materials and examples
 - **Master voice-driven prompting as preferred interaction method** - Voice should be the primary way to interact with Claude for speed and natural communication, though text remains available when needed
 - **Parallel multi-agent voice orchestration** - Develop ability to interact with multiple Claude agents simultaneously using voice commands, with intelligent routing to ensure the right commands reach the right agents with appropriate context
+- **Create composable CLAUDE.md "behavior snippets"** - Develop small, reusable behavior modules that can be mixed and matched to create custom agent personalities (e.g., snippet:voice-first, snippet:test-driven, snippet:security-paranoid). Like mixins for AI agents!
 
 ### Project Components
 *Major pieces or phases of the project*
