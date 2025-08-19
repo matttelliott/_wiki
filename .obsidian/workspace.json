@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-Projects/_Active/Claude Mastery.md",
+                "file": "_System/PKM Guide.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Claude Mastery"
+              "title": "PKM Guide"
             }
           }
         ]
@@ -171,6 +171,7 @@
   },
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
+    "01-Projects/_Active/Claude Mastery.md",
     "04-Daily/2025-08-19.md",
     "04-Daily/2025-08-18.md",
     "_System/Generic Auto-Sync Guide.md",
@@ -187,7 +188,6 @@
     "02-Areas/Development/Technical Stack.md.tmp.30765.1755501844178",
     "02-Areas/Development",
     "01-Projects/_Active/Personal Wiki System Evolution.md",
-    "01-Projects/_Active/Claude Mastery.md",
     "01-Projects/_Active/iPhone Pomodoro Timer.md",
     "01-Projects/_Active/AI-Centered Dotfiles.md",
     "_System/Sync Architecture.md",
