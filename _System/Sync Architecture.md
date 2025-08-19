@@ -70,24 +70,25 @@ Icon
 .*           # All hidden files
 ```
 
-## Auto-Sync Script Details
+## Auto-Sync Implementation (New Generic System)
 
-### Current Scripts (Simplified)
+### Current Setup
+Using the reusable `auto-sync.sh` script with two separate services:
 
-#### Core Script: `wiki-sync.sh`
-- **Why it exists**: We need separate git repositories for local and iCloud (iCloud doesn't support symlinks), but they share identical sync logic
-- **Why single repo**: Accepts `WIKI_DIR` parameter so one script can handle any repository location
-- **Why iCloud detection**: iCloud requires files to be read before it downloads pending changes from iPhone
-- **Why commit-first**: Prevents iPhone edits from being lost when git stashes uncommitted changes during pull
+#### Services
+1. **`com.user.wiki-local`** - Syncs local wiki (`~/_wiki`)
+   - Runs every 5 minutes
+   - Standard git sync
+   
+2. **`com.user.wiki-icloud`** - Syncs iCloud wiki
+   - Runs every 5 minutes  
+   - iCloud mode enabled (reads files before syncing)
+   - Enables iPhone Obsidian edits
 
-#### Wrapper Script: `wiki-sync-all.sh`  
-- **Why it exists**: Both repositories must sync to GitHub independently, but launchd can only run one command
-- **Why wrapper pattern**: Simpler than configuring multiple launchd services or complex shell commands
-- **Why both repos**: Local repo for fast access, iCloud repo for iPhone Obsidian compatibility
-
-#### Helper Scripts
-- **`setup-sync.sh`** - Initial setup for sync services
-- **`sync-status.sh`** - Check sync status and recent activity
+#### Scripts
+- **`auto-sync.sh`** - Generic reusable sync engine (works for any git repo)
+- **`install-auto-sync.sh`** - Universal installer for any platform
+- **`sync-status.sh`** - Check status of both wiki services
 
 ### Key Features
 - Platform detection via `WIKI_DIR` path and `OSTYPE`

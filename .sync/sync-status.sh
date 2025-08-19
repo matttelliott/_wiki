@@ -1,97 +1,143 @@
 #!/bin/bash
 
-WIKI_DIR="${WIKI_DIR:-$HOME/_wiki}"
+# sync-status.sh - Check status of auto-sync services
+# Works with the new generic auto-sync system
 
-echo "=== Wiki Sync Status ==="
+echo "=== Wiki Auto-Sync Status ==="
 echo ""
 
-# Platform detection
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    PLATFORM="macOS"
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    PLATFORM="Linux"
-else
-    PLATFORM="Unknown"
-fi
-echo "Platform: $PLATFORM"
-echo ""
-
-# Git status
-echo "Git Status:"
-cd "$WIKI_DIR"
-if [ -d .git ]; then
-    echo "  Branch: $(git branch --show-current)"
-    echo "  Last commit: $(git log -1 --format='%h %s (%ar)' 2>/dev/null || echo 'No commits yet')"
-    echo "  Uncommitted changes: $(git status --porcelain 2>/dev/null | wc -l | tr -d ' ') files"
-    if git remote get-url origin &>/dev/null; then
-        echo "  Remote: $(git remote get-url origin)"
-        # Check sync status with remote
-        git fetch origin main --quiet 2>/dev/null
-        LOCAL=$(git rev-parse main 2>/dev/null)
-        REMOTE=$(git rev-parse origin/main 2>/dev/null)
-        if [ "$LOCAL" = "$REMOTE" ]; then
-            echo "  Sync: ✓ Up to date with remote"
-        elif [ "$LOCAL" = "$(git merge-base main origin/main 2>/dev/null)" ]; then
-            echo "  Sync: ⟳ Behind remote (will pull on next sync)"
-        else
-            echo "  Sync: ⟳ Diverged from remote (will sync on next run)"
-        fi
-    else
-        echo "  Remote: Not configured"
-    fi
-else
-    echo "  Git not initialized"
-fi
-
-echo ""
-echo "Sync Services:"
-
-if [ "$PLATFORM" = "macOS" ]; then
-    # Check launchd services
-    if launchctl list | grep -q "com.user.wiki-sync"; then
-        echo "  ✓ Auto-sync service is running (local)"
-    else
-        echo "  ✗ Auto-sync service is not running (local)"
-    fi
-    if launchctl list | grep -q "com.user.wiki-sync-icloud"; then
-        echo "  ✓ Auto-sync service is running (iCloud)"
-    else
-        echo "  ✗ Auto-sync service is not running (iCloud)"
-    fi
-elif [ "$PLATFORM" = "Linux" ]; then
-    # Check systemd services
-    if systemctl --user is-active wiki-sync.timer &>/dev/null; then
-        echo "  ✓ Auto-sync timer is active"
-        echo "    Next run: $(systemctl --user status wiki-sync.timer | grep "Trigger:" | sed 's/.*Trigger: //')"
-    else
-        echo "  ✗ Auto-sync timer is not active"
+# Function to check repo status
+check_repo() {
+    local repo_path="$1"
+    local repo_name="$2"
+    
+    echo "📁 $repo_name: $repo_path"
+    
+    if [ ! -d "$repo_path" ]; then
+        echo "   ❌ Repository not found"
+        return
     fi
     
-    if systemctl --user is-active wiki-watch.service &>/dev/null; then
-        echo "  ✓ File watcher is active"
+    cd "$repo_path" || return
+    
+    # Git status
+    if [ -d .git ]; then
+        # Check for uncommitted changes
+        if ! git diff --quiet || ! git diff --staged --quiet; then
+            echo "   ⚠️  Uncommitted changes present"
+        else
+            echo "   ✅ Working tree clean"
+        fi
+        
+        # Check sync with remote
+        if git remote get-url origin &>/dev/null; then
+            git fetch origin &>/dev/null 2>&1
+            LOCAL=$(git rev-parse HEAD 2>/dev/null)
+            REMOTE=$(git rev-parse @{u} 2>/dev/null)
+            BASE=$(git merge-base HEAD @{u} 2>/dev/null)
+            
+            if [ "$LOCAL" = "$REMOTE" ]; then
+                echo "   ✅ In sync with remote"
+            elif [ "$LOCAL" = "$BASE" ]; then
+                echo "   ⬇️  Behind remote (needs pull)"
+            elif [ "$REMOTE" = "$BASE" ]; then
+                echo "   ⬆️  Ahead of remote (needs push)"
+            else
+                echo "   🔄 Diverged from remote"
+            fi
+        else
+            echo "   ⚠️  No remote configured"
+        fi
+        
+        # Check for conflicts
+        if [ -f "$repo_path/.sync/.conflict" ]; then
+            echo "   ⚠️  CONFLICTS need resolution"
+        fi
     else
-        echo "  ✗ File watcher is not active"
+        echo "   ❌ Not a git repository"
+    fi
+    
+    # Check log
+    if [ -f "$repo_path/.sync/sync.log" ]; then
+        last_sync=$(tail -n 1 "$repo_path/.sync/sync.log" 2>/dev/null | cut -d' ' -f1-3)
+        if [ -n "$last_sync" ]; then
+            echo "   📝 Last sync: $last_sync"
+        fi
+    fi
+    
+    echo ""
+}
+
+# Check services
+echo "🔧 Services:"
+echo ""
+
+# macOS services
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    for service in wiki-local wiki-icloud; do
+        if launchctl list | grep -q "com.user.$service"; then
+            status=$(launchctl list | grep "com.user.$service" | awk '{print $1}')
+            if [ "$status" = "-" ]; then
+                echo "✅ com.user.$service: Running"
+            else
+                echo "⚠️  com.user.$service: Exit code $status"
+            fi
+        else
+            echo "❌ com.user.$service: Not loaded"
+        fi
+    done
+fi
+
+# Linux services
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if systemctl --user list-timers | grep -q wiki; then
+        systemctl --user status wiki-*.timer --no-pager | grep -E "wiki-.*\.timer|Active:"
+    else
+        # Check cron
+        if crontab -l 2>/dev/null | grep -q auto-sync; then
+            echo "✅ Cron job configured"
+        else
+            echo "❌ No sync service found"
+        fi
     fi
 fi
 
-# Check for conflicts
-if [ -f "$WIKI_DIR/.sync/.conflict" ]; then
-    echo ""
-    echo "⚠ CONFLICT DETECTED:"
-    cat "$WIKI_DIR/.sync/.conflict"
-fi
-
 echo ""
-echo "Recent Sync Activity (last 10 entries):"
-if [ -f "$WIKI_DIR/.sync/sync.log" ]; then
-    tail -10 "$WIKI_DIR/.sync/sync.log"
-else
-    echo "  No sync log found"
+echo "=== Repository Status ==="
+echo ""
+
+# Check local wiki
+check_repo "$HOME/_wiki" "Local Wiki"
+
+# Check iCloud wiki
+check_repo "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki" "iCloud Wiki"
+
+# Recent sync activity
+echo "=== Recent Activity ==="
+echo ""
+
+if [ -f "$HOME/_wiki/.sync/sync.log" ]; then
+    echo "Local wiki (last 5 syncs):"
+    tail -n 5 "$HOME/_wiki/.sync/sync.log" | sed 's/^/  /'
+    echo ""
 fi
 
-# Check notifications
-if [ -f "$WIKI_DIR/.sync/notifications.log" ]; then
+if [ -f "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki/.sync/sync.log" ]; then
+    echo "iCloud wiki (last 5 syncs):"
+    tail -n 5 "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki/.sync/sync.log" 2>/dev/null | sed 's/^/  /'
     echo ""
-    echo "Recent Notifications:"
-    tail -5 "$WIKI_DIR/.sync/notifications.log"
 fi
+
+# Commands reminder
+echo "=== Useful Commands ==="
+echo ""
+echo "Manual sync:"
+echo "  Local:  ~/.sync/auto-sync.sh -d ~/_wiki"
+echo "  iCloud: ~/.sync/auto-sync.sh -d ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Wiki -i"
+echo ""
+echo "Service control:"
+echo "  Stop all:   launchctl unload ~/Library/LaunchAgents/com.user.wiki-*.plist"
+echo "  Start all:  launchctl load ~/Library/LaunchAgents/com.user.wiki-*.plist"
+echo ""
+echo "View logs:"
+echo "  tail -f ~/.sync/sync.log"
