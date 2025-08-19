@@ -13,7 +13,7 @@
 Everything goes into the inbox first. No exceptions.
 
 ### Capture Tools
-- **Obsidian Inbox:** [[00-Inbox]] folder
+- **Obsidian Inbox:** [[00-inbox]] folder
 - **Apple Reminders:** Quick capture on iPhone/Mac
 - **Physical Inbox:** For papers, mail, business cards
 - **Voice Memos:** Transcribe into inbox later
@@ -38,7 +38,7 @@ Process inbox items with these questions:
    - **YES** → Do it now
    - **NO** → Defer or delegate
 5. **Is it a project?** (requires more than one action)
-   - **YES** → Create project in [[01-Projects]]
+   - **YES** → Create project in [[01-projects]]
    - **NO** → Single action task
 
 ## 🗂 Organize
@@ -78,7 +78,7 @@ Examples:
 - Review next actions
 - Process any captures
 
-### [[05-Templates/Weekly Review|Weekly Review]] (90 minutes)
+### [[05-templates/weekly-review|Weekly Review]] (90 minutes)
 Every week, typically Sunday:
 1. Get Clear - Process all inboxes
 2. Get Current - Update all lists
@@ -143,17 +143,17 @@ Consider these four criteria:
 - [ ] Set up physical inbox location
 - [ ] Configure Apple Reminders for quick capture
 - [ ] Schedule weekly review (90 min block)
-- [ ] Do initial mind sweep into [[00-Inbox]]
+- [ ] Do initial mind sweep into [[00-inbox]]
 - [ ] Process inbox using clarifying questions
-- [ ] Create first projects in [[01-Projects]]
+- [ ] Create first projects in [[01-projects]]
 - [ ] Define your contexts (customize the defaults)
 - [ ] Start daily notes practice
 
 ## 📚 Resources
 - [Getting Things Done by David Allen](https://gettingthingsdone.com)
 - [GTD in 15 minutes](https://hamberg.no/gtd)
-- [[05-Templates/Weekly Review|Weekly Review Template]]
-- [[_System/PKM Guide|How GTD connects with PKM]]
+- [[05-templates/weekly-review|Weekly Review Template]]
+- [[_system/pkm-guide|How GTD connects with PKM]]
 
 ---
 *Remember: Your mind is for having ideas, not holding them.*

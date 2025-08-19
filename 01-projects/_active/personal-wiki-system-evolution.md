@@ -207,10 +207,10 @@ Wiki System/
 
 ## 📎 Supporting Materials
 *Links to relevant documents, files, and resources*
-- [[GTD Overview]] - Already in system
-- [[PKM Guide]] - Already in system
-- [[Daily Note]] template
-- [[Weekly Review]] template
+- [[gtd-overview]] - Already in system
+- [[pkm-guide]] - Already in system
+- [[daily-note]] template
+- [[weekly-review]] template
 - Getting Things Done by David Allen
 - Building a Second Brain by Tiago Forte
 - How to Take Smart Notes by Sönke Ahrens

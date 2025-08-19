@@ -286,7 +286,7 @@ obsidian://search?vault=_wiki_&query=search%20term
 - [iOS Shortcuts Gallery](https://shortcuts.gallery)
 - [Obsidian URL Scheme Docs](https://help.obsidian.md/Advanced+topics/Using+Obsidian+URI)
 - [[_System/GTD Overview|GTD System Guide]]
-- [[_System/PKM Guide|PKM Methodology]]
+- [[_system/pkm-guide|PKM Methodology]]
 
 ---
 *The best system is the one you actually use. Start simple, optimize gradually.*

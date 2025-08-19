@@ -9,25 +9,25 @@ tags: [dashboard, home]
 
 ## 🚀 Quick Access
 ### Daily Operations
-- [[04-Daily/{{date:YYYY-MM-DD}}|Today's Daily Note]]
-- [[00-Inbox/|📥 Inbox]] - Process captured items
-- [[05-Templates/Weekly Review|📅 Weekly Review Template]]
+- [[04-daily/{{date:YYYY-MM-DD}}|Today's Daily Note]]
+- [[00-inbox/|📥 Inbox]] - Process captured items
+- [[05-templates/weekly-review|📅 Weekly Review Template]]
 
 ### Quick Capture
-- [[05-Templates/Idea Capture|💡 New Idea]]
-- [[05-Templates/Meeting Note|👥 New Meeting]]
-- [[05-Templates/Project|📋 New Project]]
+- [[05-templates/idea-capture|💡 New Idea]]
+- [[05-templates/meeting-note|👥 New Meeting]]
+- [[05-templates/project|📋 New Project]]
 
 ## 📊 GTD System
 ### Collection Points
-- **[[00-Inbox]]** - All captured items for processing
+- **[[00-inbox]]** - All captured items for processing
 - **Apple Reminders** - Quick capture on iOS/macOS
 - **Physical Inbox** - Papers and materials
 
 ### Horizons of Focus
 1. **Runway** - [[Next Actions|Current Actions]]
-2. **Projects** - [[01-Projects/_Active|Active Projects]]
-3. **Areas** - [[02-Areas|Areas of Responsibility]]
+2. **Projects** - [[01-projects/_active|Active Projects]]
+3. **Areas** - [[02-areas|Areas of Responsibility]]
 4. **Goals** - [[Annual Goals|1-2 Year Objectives]]
 5. **Vision** - [[Vision|3-5 Year Vision]]
 6. **Purpose** - [[Life Purpose|Purpose & Principles]]
@@ -86,18 +86,18 @@ WHERE contains(text, "#waiting")
 ## 🔧 System Management
 
 ### Documentation
-- [[_System/GTD Overview|GTD System Guide]]
-- [[_System/PKM Guide|PKM Methodology]]
-- [[_System/Apple Integration|Apple Ecosystem Setup]]
-- [[_System/README|Quick Start Guide]]
+- [[_system/gtd-overview|GTD System Guide]]
+- [[_system/pkm-guide|PKM Methodology]]
+- [[_system/apple-integration|Apple Ecosystem Setup]]
+- [[_system/readme|Quick Start Guide]]
 
 ### Templates
-- [[05-Templates/Daily Note|Daily Note Template]]
-- [[05-Templates/Weekly Review|Weekly Review Template]]
-- [[05-Templates/Project|Project Template]]
-- [[05-Templates/Literature Note|Literature Note Template]]
-- [[05-Templates/Idea Capture|Idea Capture Template]]
-- [[05-Templates/Meeting Note|Meeting Note Template]]
+- [[05-templates/daily-note|Daily Note Template]]
+- [[05-templates/weekly-review|Weekly Review Template]]
+- [[05-templates/project|Project Template]]
+- [[05-templates/literature-note|Literature Note Template]]
+- [[05-templates/idea-capture|Idea Capture Template]]
+- [[05-templates/meeting-note|Meeting Note Template]]
 
 ### Maintenance
 - [ ] Weekly Review - Every Sunday

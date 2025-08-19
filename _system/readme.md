@@ -19,22 +19,22 @@ _wiki_/
 ## ⚡ Getting Started in 5 Minutes
 
 ### Step 1: Open Your Dashboard
-Start here → [[_System/INDEX|🏠 Dashboard]]
+Start here → [[_system/index|🏠 Dashboard]]
 
 ### Step 2: Create Today's Daily Note
 1. Click on today's date in the dashboard
 2. Or create manually: `04-Daily/2024-01-15.md`
-3. Use template: [[05-Templates/Daily Note]]
+3. Use template: [[05-templates/daily-note]]
 
 ### Step 3: Capture Your First Thoughts
-1. Brain dump into [[00-Inbox]]
+1. Brain dump into [[00-inbox]]
 2. Don't organize yet, just capture
-3. Use [[05-Templates/Idea Capture]] for structured capture
+3. Use [[05-templates/idea-capture]] for structured capture
 
 ### Step 4: Process Using GTD
 During your daily/weekly review:
 - Is it actionable? → Create task or project
-- Reference? → Move to [[03-Resources]]
+- Reference? → Move to [[03-resources]]
 - Someday? → Add to Someday/Maybe list
 - Not needed? → Delete
 
@@ -67,7 +67,7 @@ During your daily/weekly review:
 3. Quick reflection note
 
 ### Weekly Review (90 minutes)
-Every Sunday - Use [[05-Templates/Weekly Review]]
+Every Sunday - Use [[05-templates/weekly-review]]
 1. **Get Clear** (30 min) - Empty all inboxes
 2. **Get Current** (45 min) - Update projects/tasks
 3. **Get Creative** (15 min) - New ideas/projects
@@ -106,12 +106,12 @@ Every Sunday - Use [[05-Templates/Weekly Review]]
 
 ## 📖 Templates Included
 
-- [[05-Templates/Daily Note|Daily Note]] - Daily planning and reflection
-- [[05-Templates/Weekly Review|Weekly Review]] - GTD weekly review
-- [[05-Templates/Project|Project]] - Project planning
-- [[05-Templates/Meeting Note|Meeting]] - Meeting notes
-- [[05-Templates/Literature Note|Literature Note]] - Reading notes
-- [[05-Templates/Idea Capture|Idea Capture]] - Quick ideas
+- [[05-templates/daily-note|Daily Note]] - Daily planning and reflection
+- [[05-templates/weekly-review|Weekly Review]] - GTD weekly review
+- [[05-templates/project|Project]] - Project planning
+- [[05-templates/meeting-note|Meeting]] - Meeting notes
+- [[05-templates/literature-note|Literature Note]] - Reading notes
+- [[05-templates/idea-capture|Idea Capture]] - Quick ideas
 
 ## ⌨️ Keyboard Shortcuts
 
@@ -187,9 +187,9 @@ Every Sunday - Use [[05-Templates/Weekly Review]]
 ## 🔗 Helpful Resources
 
 ### Documentation
-- [[_System/GTD Overview|GTD System Guide]]
-- [[_System/PKM Guide|PKM Methodology]]
-- [[_System/Apple Integration|Apple Setup Guide]]
+- [[_system/gtd-overview|GTD System Guide]]
+- [[_system/pkm-guide|PKM Methodology]]
+- [[_system/apple-integration|Apple Setup Guide]]
 
 ### External Links
 - [Obsidian Help](https://help.obsidian.md)
@@ -206,7 +206,7 @@ Every Sunday - Use [[05-Templates/Weekly Review]]
 
 ## 🆘 Need Help?
 
-- Check [[_System/INDEX|Dashboard]] for navigation
+- Check [[_system/index|Dashboard]] for navigation
 - Review system guides in `_System/` folder
 - Visit [Obsidian Forum](https://forum.obsidian.md)
 - Search vault with `Cmd/Ctrl + Shift + F`

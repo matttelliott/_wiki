@@ -33,7 +33,7 @@ week: {{date:YYYY-[W]ww}}
 - [ ] Screenshots and photos
 
 ### 📝 Process Obsidian Inbox
-- [ ] Review [[00-Inbox]] folder
+- [ ] Review [[00-inbox]] folder
 - [ ] Clarify and organize all captured items
 - [ ] Move items to appropriate locations
 
