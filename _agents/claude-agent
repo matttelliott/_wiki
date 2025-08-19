@@ -51,7 +51,7 @@ get_agent_description() {
     
     if [ -z "$desc" ] || [[ "$desc" =~ ^(Agent|Purpose|Description|Identity) ]]; then
         # Try to get first meaningful line
-        desc=$(grep -v "^#\|^$\|^---\|^```" "$file" 2>/dev/null | head -1 | cut -c1-60)
+        desc=$(grep -v "^#\|^$\|^---\|^\`\`\`" "$file" 2>/dev/null | head -1 | cut -c1-60)
     fi
     
     if [ -z "$desc" ]; then
