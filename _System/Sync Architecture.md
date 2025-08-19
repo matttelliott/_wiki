@@ -38,6 +38,15 @@ Multi-platform synchronized wiki system using git as the source of truth, with a
 
 ### `.gitignore` - What git doesn't track:
 ```
+# Sync log files only (scripts ARE tracked!)
+.sync/*.log
+.sync/.sync.lock
+.sync/.conflict
+.sync/notifications.log
+.sync/sync-stdout.log
+.sync/sync-stderr.log
+.sync/sync-all.log
+
 # Google Drive files
 *.driveupload
 *.drivedownload
@@ -46,10 +55,11 @@ Icon
 
 # System files
 .DS_Store
-.sync/
 .obsidian/workspace*
 .obsidian/cache
 ```
+
+**IMPORTANT**: The `.sync/` folder scripts ARE tracked in git. Only log files are excluded to prevent merge conflicts.
 
 ### `.gignore` - What Google Drive doesn't sync:
 ```
@@ -62,21 +72,27 @@ Icon
 
 ## Auto-Sync Script Details
 
+### Available Scripts
+1. **`wiki-auto-sync.sh`** - Original script (pulls before committing - can lose iPhone changes)
+2. **`wiki-auto-sync-improved.sh`** - Improved script (commits BEFORE pulling - preserves iPhone changes)
+3. **`wiki-sync-all.sh`** - Wrapper that syncs both local and iCloud repos
+
 ### Key Features
 - Platform detection via `WIKI_DIR` path and `OSTYPE`
 - Commits WITHOUT signing: `git -c commit.gpgsign=false commit`
-- Pulls before pushing to handle upstream changes
-- Auto-resolves conflicts in system files
 - Desktop notifications for manual conflicts
+- Log files excluded from git to prevent conflicts
 
-### Sync Flow
+### Sync Flow (Improved Version)
 1. Check for lock file (prevent concurrent runs)
 2. Initialize git if needed
-3. Fetch and pull remote changes (if behind)
-4. Stage all changes
-5. Commit with platform identifier
+3. **COMMIT local changes first** (preserves iPhone edits!)
+4. Fetch and check remote status
+5. Pull/merge/rebase as needed
 6. Push to remote
 7. Handle conflicts if they arise
+
+**CRITICAL**: The improved script commits BEFORE pulling. This prevents iPhone changes from being lost in stash.
 
 ## Services Configuration
 
