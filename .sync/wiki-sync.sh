@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Improved Wiki Auto-Sync Script
-# Commits BEFORE pulling to preserve local changes (especially from iPhone)
+# Unified Wiki Auto-Sync Script
+# Intelligently handles both local and iCloud repositories
+# Commits BEFORE pulling to preserve all changes (especially from iPhone)
 
 WIKI_DIR="${WIKI_DIR:-$HOME/_wiki}"
 SYNC_LOG="$WIKI_DIR/.sync/sync.log"
@@ -14,12 +15,16 @@ mkdir -p "$WIKI_DIR/.sync"
 # Detect platform
 if [[ "$WIKI_DIR" == *"iCloud~md~obsidian"* ]]; then
     PLATFORM="icloud"
+    IS_ICLOUD=true
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     PLATFORM="macos"
+    IS_ICLOUD=false
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     PLATFORM="linux"
+    IS_ICLOUD=false
 else
     PLATFORM="unknown"
+    IS_ICLOUD=false
 fi
 
 # Function to log messages
@@ -44,12 +49,33 @@ send_notification() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] NOTIFICATION: $title - $message" >> "$WIKI_DIR/.sync/notifications.log"
 }
 
+# Function to trigger iCloud file downloads (only for iCloud repos)
+trigger_icloud_sync() {
+    if [ "$IS_ICLOUD" = true ]; then
+        log_message "Triggering iCloud file sync by reading files..."
+        
+        # Read all markdown files to trigger iCloud download
+        # This is necessary because iCloud doesn't always download files automatically
+        find "$WIKI_DIR" -type f -name "*.md" -not -path "*/\.git/*" -not -path "*/\.sync/*" -not -path "*/\.obsidian/*" 2>/dev/null | while read -r file; do
+            # Simply reading the file triggers iCloud to download it if needed
+            head -n 1 "$file" > /dev/null 2>&1
+        done
+        
+        # Give iCloud a moment to complete downloads
+        sleep 2
+        
+        log_message "iCloud file sync triggered"
+    fi
+}
+
 # Check for lock file
 if [ -f "$LOCK_FILE" ]; then
+    # If lock file is older than 5 minutes, remove it (stale)
     if [[ $(find "$LOCK_FILE" -mmin +5 2>/dev/null) ]]; then
         log_message "Removing stale lock file"
         rm -f "$LOCK_FILE"
     else
+        # Another sync is running, exit silently
         exit 0
     fi
 fi
@@ -73,7 +99,10 @@ if [ ! -d .git ]; then
     
     cat > .gitignore << 'EOF'
 .DS_Store
-.sync/
+# Sync log files only (keep scripts!)
+.sync/*.log
+.sync/.sync.lock
+.sync/.conflict
 .obsidian/workspace*
 .obsidian/cache
 .trash/
@@ -86,7 +115,10 @@ EOF
     git -c commit.gpgsign=false commit -m "Initial commit of wiki"
 fi
 
-# STEP 1: COMMIT LOCAL CHANGES FIRST (preserve iPhone edits!)
+# STEP 1: TRIGGER ICLOUD SYNC (for iCloud repos only)
+trigger_icloud_sync
+
+# STEP 2: COMMIT LOCAL CHANGES FIRST (preserve iPhone edits!)
 git add -A
 if ! git diff --staged --quiet; then
     COMMIT_MSG="Auto-sync from $PLATFORM: $(date '+%Y-%m-%d %H:%M:%S')"
@@ -97,13 +129,13 @@ if ! git diff --staged --quiet; then
     fi
 fi
 
-# STEP 2: CHECK FOR REMOTE
+# STEP 3: CHECK FOR REMOTE
 HAS_REMOTE=false
 if git remote get-url origin &>/dev/null; then
     HAS_REMOTE=true
 fi
 
-# STEP 3: IF REMOTE EXISTS, SYNC WITH IT
+# STEP 4: IF REMOTE EXISTS, SYNC WITH IT
 if [ "$HAS_REMOTE" = true ]; then
     # Fetch to see what's on remote
     if git fetch origin main --quiet 2>/dev/null; then
@@ -121,6 +153,7 @@ if [ "$HAS_REMOTE" = true ]; then
                 fi
             else
                 # We've diverged - need to merge or rebase
+                # Try rebase first (cleaner history)
                 if git pull --rebase origin main --quiet 2>/dev/null; then
                     log_message "Rebased onto remote"
                 else
@@ -131,6 +164,7 @@ if [ "$HAS_REMOTE" = true ]; then
                     else
                         log_message "Sync failed - manual intervention needed"
                         send_notification "Wiki Sync Conflict" "Unable to sync with remote" "critical"
+                        touch "$CONFLICT_FLAG"
                     fi
                 fi
             fi
@@ -156,7 +190,7 @@ if [ -f "$CONFLICT_FLAG" ]; then
     fi
 fi
 
-# Cleanup old log entries
+# Cleanup old log entries (keep last 1000 lines)
 for logfile in "$SYNC_LOG" "$WIKI_DIR/.sync/notifications.log"; do
     if [ -f "$logfile" ] && [ $(wc -l < "$logfile") -gt 1000 ]; then
         tail -n 1000 "$logfile" > "$logfile.tmp"

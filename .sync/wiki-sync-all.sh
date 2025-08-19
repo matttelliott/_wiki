@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Wiki Sync All - Syncs both local and iCloud wiki repositories
-# Configurable paths with sensible defaults
+# Uses the unified wiki-sync.sh script for both locations
 
 # Configuration - modify these if your paths are different
 LOCAL_WIKI="${LOCAL_WIKI:-$HOME/_wiki}"
@@ -17,32 +17,19 @@ log_message() {
 log_message "Starting sync for all wiki locations"
 
 # Sync local wiki
-if [ -d "$LOCAL_WIKI" ] && [ -f "$LOCAL_WIKI/.sync/wiki-auto-sync-improved.sh" ]; then
+if [ -d "$LOCAL_WIKI" ]; then
     log_message "Syncing local wiki at $LOCAL_WIKI"
-    cd "$LOCAL_WIKI" || {
-        log_message "ERROR: Cannot cd to $LOCAL_WIKI"
-        exit 1
-    }
-    WIKI_DIR="$LOCAL_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-auto-sync-improved.sh"
+    WIKI_DIR="$LOCAL_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-sync.sh"
     log_message "Local wiki sync complete"
 else
-    log_message "WARNING: Local wiki not found or sync script missing at $LOCAL_WIKI"
+    log_message "WARNING: Local wiki not found at $LOCAL_WIKI"
 fi
 
-# Sync iCloud wiki (using iCloud-optimized script that reads files first)
+# Sync iCloud wiki (the unified script handles iCloud-specific logic)
 if [ -d "$ICLOUD_WIKI" ]; then
-    # Use the iCloud-optimized script from the main wiki location
-    if [ -f "$LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh" ]; then
-        log_message "Syncing iCloud wiki at $ICLOUD_WIKI (with file reading)"
-        cd "$ICLOUD_WIKI" || {
-            log_message "ERROR: Cannot cd to $ICLOUD_WIKI"
-            exit 1
-        }
-        WIKI_DIR="$ICLOUD_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh"
-        log_message "iCloud wiki sync complete"
-    else
-        log_message "WARNING: iCloud sync script not found at $LOCAL_WIKI/.sync/wiki-auto-sync-icloud.sh"
-    fi
+    log_message "Syncing iCloud wiki at $ICLOUD_WIKI"
+    WIKI_DIR="$ICLOUD_WIKI" /bin/bash "$LOCAL_WIKI/.sync/wiki-sync.sh"
+    log_message "iCloud wiki sync complete"
 else
     log_message "WARNING: iCloud wiki not found at $ICLOUD_WIKI"
 fi
