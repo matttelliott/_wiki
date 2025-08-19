@@ -74,18 +74,29 @@ echo ""
 
 # macOS services
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    for service in wiki-local wiki-icloud; do
-        if launchctl list | grep -q "com.user.$service"; then
-            status=$(launchctl list | grep "com.user.$service" | awk '{print $1}')
-            if [ "$status" = "-" ]; then
-                echo "✅ com.user.$service: Running"
-            else
-                echo "⚠️  com.user.$service: Exit code $status"
-            fi
+    # Check for bidirectional service first
+    if launchctl list | grep -q "com.user.wiki-bidirectional"; then
+        status=$(launchctl list | grep "com.user.wiki-bidirectional" | awk '{print $1}')
+        if [ "$status" = "-" ]; then
+            echo "✅ com.user.wiki-bidirectional: Running (handles both repos)"
         else
-            echo "❌ com.user.$service: Not loaded"
+            echo "⚠️  com.user.wiki-bidirectional: Exit code $status"
         fi
-    done
+    else
+        # Fall back to checking individual services
+        for service in wiki-local wiki-icloud; do
+            if launchctl list | grep -q "com.user.$service"; then
+                status=$(launchctl list | grep "com.user.$service" | awk '{print $1}')
+                if [ "$status" = "-" ]; then
+                    echo "✅ com.user.$service: Running"
+                else
+                    echo "⚠️  com.user.$service: Exit code $status"
+                fi
+            else
+                echo "❌ com.user.$service: Not loaded"
+            fi
+        done
+    fi
 fi
 
 # Linux services
