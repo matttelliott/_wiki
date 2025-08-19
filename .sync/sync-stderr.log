@@ -1,3 +1,4 @@
 error: 1Password: failed to fill whole buffer
 
 fatal: failed to write commit object
+/bin/bash: /Users/matt/Library/Mobile Documents/iCloud~md~obsidian/Documents/Wiki/.sync/wiki-auto-sync.sh: Operation not permitted
