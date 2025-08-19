@@ -11,10 +11,14 @@
             "id": "76d51b8a17c2466a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "01-projects/Wiki Sync System.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Wiki Sync System"
             }
           }
         ]
@@ -167,6 +171,7 @@
   },
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
+    "01-projects/Wiki Sync System.md",
     "conflict-test-2.md",
     "_system/Conflict Handling in Bidirectional Sync.md",
     "conflict-test.md",
@@ -201,7 +206,6 @@
     "02-areas/development/coding-standards.md",
     "01-projects/_active/personal-wiki-system-evolution.md",
     "01-projects/_active/iphone-pomodoro-timer.md",
-    "01-projects/_active/home-network-infrastructure.md",
-    "01-projects/_active/claude-mastery.md"
+    "01-projects/_active/home-network-infrastructure.md"
   ]
 }
