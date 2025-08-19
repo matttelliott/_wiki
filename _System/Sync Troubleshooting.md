@@ -13,12 +13,25 @@ Run this first:
 
 **Symptom**: Edits made on iPhone disappear after sync
 
-**Cause**: Original sync script pulls before committing, causing iPhone changes to be stashed and lost
+**Causes**: 
+1. Original sync script pulls before committing, causing iPhone changes to be stashed and lost
+2. iCloud hasn't downloaded the changes from iPhone to macOS yet
 
-**Solution**: Use the improved sync script (`wiki-auto-sync-improved.sh`) which commits BEFORE pulling:
+**Solution**: 
+1. Use the improved sync scripts which commit BEFORE pulling
+2. For iCloud repos, use `wiki-auto-sync-icloud.sh` which reads files to trigger downloads:
 ```bash
-# Replace the old script
-cp ~/.sync/wiki-auto-sync-improved.sh ~/.sync/wiki-auto-sync.sh
+# The iCloud-optimized script automatically:
+# 1. Reads all markdown files to trigger iCloud downloads
+# 2. Waits for iCloud to sync
+# 3. Commits changes BEFORE pulling
+```
+
+**Manual iCloud Trigger**: If changes aren't appearing:
+```bash
+# Force iCloud to download by reading files
+cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Wiki
+find . -name "*.md" -exec head -n 1 {} \; > /dev/null
 ```
 
 **Recovery**: Check git stash for lost changes:
