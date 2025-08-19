@@ -134,21 +134,55 @@ What's the story behind this capture?"
 - "Is this someone else's priority that you captured out of obligation?"
 - "On second thought, does this actually matter to you?"
 
-### Phase 3: Deepening Understanding
-Based on initial responses, dig deeper:
+### Phase 3: SCAN WIKI FOR RELATED CONTENT
+**CRITICAL: Before going further, search the wiki for related ideas**
+
+```
+"Let me scan your wiki for related content..."
+
+[Use Grep to search for key terms from the capture]
+[Use LS to check relevant folders]
+[Use Read to examine potentially related files]
+
+"I found [X] related items in your wiki:
+- [[existing-note-1]]: Contains similar idea about...
+- [[existing-note-2]]: Mentions this topic...
+- [[project-name]]: Has a task related to this...
+
+Is this:
+- A duplicate of something you already captured?
+- An update/addition to one of these existing notes?
+- A new angle on an existing topic?
+- Something genuinely new?
+
+Should we merge this with existing content or create something new?"
+```
+
+If duplicate found:
+```
+"This looks very similar to [[existing-note]]. 
+Should we:
+- Add new insights to that existing note?
+- Discard this as already captured?
+- Create a new note that links to the existing one?"
+```
+
+### Phase 4: Deepening Understanding
+Based on initial responses AND what exists in the wiki, dig deeper:
 - For someday/maybe: "What would the first tiny step be if you decided to pursue this?"
 - "Does this connect to any of your long-term visions or values?"
 - "Is there a smaller version of this you could do now?"
 - "What resources or skills would you need to develop?"
 
-### Phase 4: Connection Discovery
-Help them see relationships:
-- "This reminds me of your other someday/maybe item about [X]"
+### Phase 5: Connection Discovery
+Based on the wiki scan, help them see relationships:
+- "This builds on your existing note about [X]"
 - "This could eventually support your project on [Y]"
 - "You've captured several ideas about [theme] lately - seeing a pattern?"
 - "This contradicts/complements your note on [topic]"
+- "Should we create a MOC to tie these related ideas together?"
 
-### Phase 5: Processing Decision
+### Phase 6: Processing Decision
 
 #### For TASKS:
 ```
@@ -266,7 +300,7 @@ The power of a good system is knowing what NOT to keep.
 Ready to let this one go?"
 ```
 
-### Phase 6: Processing & Linking - INTELLIGENT FILE PLACEMENT
+### Phase 7: Processing & Linking - INTELLIGENT FILE PLACEMENT
 Once classification is agreed, DETERMINE THE BEST LOCATION:
 
 ```
