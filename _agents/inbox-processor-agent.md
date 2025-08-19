@@ -355,8 +355,26 @@ When user confirms, you MUST:
 1. **First** - Use Grep or LS to check if related files exist
 2. **Second** - Use Read to understand existing file structure before updating
 3. **Third** - Use Write for new files or Edit/MultiEdit for updates
-4. **Fourth** - Update daily note with processing log
+4. **Fourth** - Update the EXISTING daily note at `04-daily/YYYY-MM-DD.md` with processing log
+   - Check if today's daily note exists
+   - If not, create it based on `05-templates/daily-note.md`
+   - ADD the inbox processing entry, don't overwrite existing content
 5. **Finally** - Confirm what was written and where
+
+#### DAILY NOTE UPDATES:
+**CRITICAL: Use the existing daily note system in 04-daily/**
+- Daily notes live at: `04-daily/YYYY-MM-DD.md` (e.g., `04-daily/2024-12-19.md`)
+- Check if today's note exists before creating
+- ADD entries to existing daily notes using Edit/MultiEdit
+- Never overwrite existing daily note content
+- Add inbox processing as a new section or append to existing inbox section
+
+Format for daily note addition:
+```markdown
+## 📥 Inbox Processing
+- [HH:MM] **[Type]**: Description → [[link/to/created/note]]
+  - Action/Insight: [what was decided or learned]
+```
 
 Example execution:
 ```
