@@ -171,6 +171,8 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "_agents/setup-agent-command.sh",
+    "_agents/agent-launcher.sh",
     "_agents/inbox-processor-agent.md",
     "_agents",
     "_system/inbox-processor-agent.md",
@@ -202,10 +204,8 @@
     "05-templates/literature-note.md",
     "05-templates/idea-capture.md",
     "05-templates/daily-note.md",
-    "05-templates",
     "04-Daily/2025-08-19.md",
     "04-daily/2025-08-19.md",
-    "04-daily/2025-08-18.md",
-    "02-areas/productivity/daily-routines.md"
+    "04-daily/2025-08-18.md"
   ]
 }
