@@ -9,7 +9,25 @@ Run this first:
 
 ## Common Issues and Solutions
 
-### 1. Authentication Prompts During Auto-Commit
+### 1. iPhone Changes Lost During Sync
+
+**Symptom**: Edits made on iPhone disappear after sync
+
+**Cause**: Original sync script pulls before committing, causing iPhone changes to be stashed and lost
+
+**Solution**: Use the improved sync script (`wiki-auto-sync-improved.sh`) which commits BEFORE pulling:
+```bash
+# Replace the old script
+cp ~/.sync/wiki-auto-sync-improved.sh ~/.sync/wiki-auto-sync.sh
+```
+
+**Recovery**: Check git stash for lost changes:
+```bash
+git stash list
+git stash show -p stash@{0}
+```
+
+### 2. Authentication Prompts During Auto-Commit
 
 **Symptom**: 1Password prompts for authentication every 5 minutes
 
@@ -26,7 +44,27 @@ git config --get commit.gpgsign
 grep "commit.gpgsign=false" ~/.sync/wiki-auto-sync.sh
 ```
 
-### 2. "Failed to fetch from remote" Errors
+### 3. Constant Conflicts on sync.log Files
+
+**Symptom**: Every sync causes merge conflicts in `.sync/sync.log`
+
+**Cause**: Log files were being tracked in git, causing conflicts between machines
+
+**Solution**: Log files are now excluded from git (only scripts are tracked):
+```bash
+# Already fixed in .gitignore:
+.sync/*.log
+.sync/.sync.lock
+.sync/.conflict
+```
+
+**If still happening**: Remove log files from tracking:
+```bash
+git rm --cached .sync/*.log
+git commit -m "Stop tracking log files"
+```
+
+### 4. "Failed to fetch from remote" Errors
 
 **Symptom**: Repeated failures in sync log
 
