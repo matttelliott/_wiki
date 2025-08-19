@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# Claude Agent Finder - Simple Universal Agent Launcher
+# Searches for Claude agents across projects and dotfiles
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+BOLD='\033[1m'
+
+# Find all potential agent files
+find_agents() {
+    local agents=()
+    local search_dirs=(
+        "./_agents"
+        "./.claude/agents"
+        "$HOME/.claude/agents"
+        "$HOME/.config/claude/agents"
+        "$HOME/_wiki/_agents"
+        "$HOME/dotfiles/claude/agents"
+    )
+    
+    for dir in "${search_dirs[@]}"; do
+        if [ -d "$dir" ]; then
+            # Find agent files
+            while IFS= read -r file; do
+                agents+=("$file")
+            done < <(find "$dir" -maxdepth 2 -type f \( -name "*agent*.md" -o -name "*.claude.md" -o -name "*.agent" \) 2>/dev/null)
+        fi
+    done
+    
+    # Remove duplicates by basename
+    printf '%s\n' "${agents[@]}" | awk -F/ '!seen[$NF]++'
+}
+
+# Main menu
+show_menu() {
+    clear
+    echo -e "${CYAN}${BOLD}Claude Agent Launcher${NC}\n"
+    
+    # Get agents
+    readarray -t agents < <(find_agents)
+    
+    if [ ${#agents[@]} -eq 0 ]; then
+        echo -e "${RED}No agents found!${NC}"
+        echo "Create agent files (*agent*.md) in:"
+        echo "  • ./_agents (project)"
+        echo "  • ~/.claude/agents (global)"
+        echo "  • ~/dotfiles/claude/agents"
+        exit 1
+    fi
+    
+    # Display agents
+    for i in "${!agents[@]}"; do
+        agent="${agents[$i]}"
+        name=$(basename "$agent" .md | sed 's/[-_]agent//' | sed 's/[-_]/ /g')
+        
+        # Determine location type
+        if [[ "$agent" == "./"* ]] || [[ "$agent" == "$(pwd)"* ]]; then
+            loc="${GREEN}[PROJECT]${NC}"
+        elif [[ "$agent" == "$HOME/_wiki"* ]]; then
+            loc="${YELLOW}[WIKI]${NC}"
+        elif [[ "$agent" == "$HOME/dotfiles"* ]]; then
+            loc="${CYAN}[DOTFILE]${NC}"
+        elif [[ "$agent" == "$HOME"* ]]; then
+            loc="${BLUE}[GLOBAL]${NC}"
+        else
+            loc="[OTHER]"
+        fi
+        
+        echo -e "${GREEN}$((i+1))${NC}) $loc ${BOLD}$name${NC}"
+        echo -e "   ${CYAN}$(dirname "$agent")${NC}\n"
+    done
+    
+    echo -e "${RED}q${NC}) Quit"
+    echo -n -e "\nSelect agent: "
+    read -r choice
+    
+    if [[ "$choice" == "q" ]]; then
+        exit 0
+    elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le ${#agents[@]} ]; then
+        agent_file="${agents[$((choice-1))]}"
+        echo -e "\n${GREEN}Launching agent...${NC}"
+        claude --append-system-prompt "$(cat "$agent_file")"
+    else
+        echo -e "${RED}Invalid choice${NC}"
+        sleep 1
+        show_menu
+    fi
+}
+
+# Quick launch if argument provided
+if [ $# -gt 0 ]; then
+    search="$1"
+    readarray -t agents < <(find_agents)
+    
+    for agent in "${agents[@]}"; do
+        if [[ "$(basename "$agent")" == *"$search"* ]]; then
+            echo -e "${GREEN}Found: $(basename "$agent")${NC}"
+            claude --append-system-prompt "$(cat "$agent")"
+            exit 0
+        fi
+    done
+    
+    echo -e "${RED}No agent matching: $search${NC}"
+    echo "Available agents:"
+    for agent in "${agents[@]}"; do
+        echo "  • $(basename "$agent" .md)"
+    done
+    exit 1
+fi
+
+show_menu
