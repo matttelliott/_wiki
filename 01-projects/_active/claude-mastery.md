@@ -43,6 +43,7 @@ A comprehensive Claude ecosystem with production-ready configurations, custom ag
 - Establish best practices documentation
 - Create training materials and examples
 - **Master voice-driven prompting as preferred interaction method** - Voice should be the primary way to interact with Claude for speed and natural communication, though text remains available when needed
+- **Parallel multi-agent voice orchestration** - Develop ability to interact with multiple Claude agents simultaneously using voice commands, with intelligent routing to ensure the right commands reach the right agents with appropriate context
 
 ### Project Components
 *Major pieces or phases of the project*
@@ -65,6 +66,9 @@ A comprehensive Claude ecosystem with production-ready configurations, custom ag
    - Inter-agent communication patterns
    - Orchestration and coordination systems
    - Complex workflow implementation
+   - **Voice-controlled multi-agent routing** - Build intelligent dispatcher that routes voice commands to appropriate agents based on context and intent
+   - **Parallel agent execution** - Enable multiple agents to work simultaneously on different aspects of a task
+   - **Context isolation and sharing** - Ensure each agent maintains its own context while sharing necessary information
 
 4. **Application Development Phase**
    - Building sample applications with Claude
@@ -124,6 +128,11 @@ A comprehensive Claude ecosystem with production-ready configurations, custom ag
 - **MCP Server Types:** File system, database, API gateway, tool orchestrator
 - **Agent Roles:** Architect, implementer, reviewer, tester, documenter, project manager
 - **Hook Categories:** Pre-prompt, post-response, error handling, context management
+- **Multi-Agent Voice Architecture:**
+  - Voice input → Intent classifier → Agent router → Parallel execution
+  - Each agent maintains isolated context with shared memory pool
+  - Voice feedback system to confirm routing and provide status updates
+  - "Hey Claude, tell the architect to design the API while the developer starts on the frontend"
 
 ### Learning Resources
 - Official Claude documentation: https://docs.anthropic.com/
@@ -137,6 +146,10 @@ A comprehensive Claude ecosystem with production-ready configurations, custom ag
 - [[MCP Development Notes]]
 - [[Multi-Agent Patterns]]
 - [[Claude Best Practices]]
+- [[claude-code]] - CLI tool reference
+- [[claude-cli]] - Terminology guide
+- [[claude-code-interfaces]] - All interaction methods
+- [[claude-desktop]] - GUI alternative
 - Local config directory: `~/.claude/`
 - Project templates: `~/.claude/templates/`
 - MCP servers: `~/.claude/mcp-servers/`

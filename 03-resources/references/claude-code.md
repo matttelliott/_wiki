@@ -41,9 +41,11 @@ claude -p "query"        # Query via SDK and exit
 
 Claude Code can be accessed through multiple interfaces:
 - **CLI** - Primary interface via terminal
-- **[[claude-code-interfaces#ide-integrations|IDE Integrations]]** - VS Code and JetBrains extensions
-- **[[claude-code-interfaces#sdk|SDK]]** - TypeScript and Python libraries
-- **[[claude-code-interfaces#github-actions|GitHub Actions]]** - CI/CD integration
+- **IDE Integrations** - VS Code and JetBrains extensions
+- **SDK** - TypeScript and Python libraries
+- **GitHub Actions** - CI/CD integration
+
+See [[claude-code-interfaces]] for detailed information on each interface.
 
 ## Related
 
