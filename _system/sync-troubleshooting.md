@@ -40,7 +40,32 @@ git stash list
 git stash show -p stash@{0}
 ```
 
-### 2. Authentication Prompts During Auto-Commit
+### 2. iCloud Sync Shows "Operation not permitted"
+
+**Symptom**: 
+- iCloud service exit code 126
+- Logs show: `/bin/bash: .../iCloud~md~obsidian/.../auto-sync.sh: Operation not permitted`
+
+**Cause**: macOS security blocks script execution in iCloud Drive folders
+
+**Solution**: Run sync script from local location instead:
+1. Edit the launchd plist: `~/Library/LaunchAgents/com.user.wiki-icloud.plist`
+2. Change the script path from iCloud location to local:
+   ```xml
+   <!-- Change FROM: -->
+   <string>/Users/matt/Library/Mobile Documents/.../Wiki/.sync/auto-sync.sh</string>
+   <!-- TO: -->
+   <string>/Users/matt/_wiki/.sync/auto-sync.sh</string>
+   ```
+3. Reload the service:
+   ```bash
+   launchctl unload ~/Library/LaunchAgents/com.user.wiki-icloud.plist
+   launchctl load ~/Library/LaunchAgents/com.user.wiki-icloud.plist
+   ```
+
+**Note**: The script still syncs the iCloud folder, it just runs from a location where macOS allows execution.
+
+### 3. Authentication Prompts During Auto-Commit
 
 **Symptom**: 1Password prompts for authentication every 5 minutes
 
