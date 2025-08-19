@@ -371,7 +371,7 @@ Agent:
     ✓ Logged in today's daily note"
 ```
 
-### Phase 7: Completion Check
+### Phase 8: Completion Check
 **CRITICAL**: Never assume you're done
 - "Do you feel complete with this thought, or is there more to explore?"
 - "Have we captured the essence and the energy of this?"
@@ -614,7 +614,11 @@ Ready for the next item?"
 - Judge dreams as impractical, but also don't keep trash as dreams
 
 ### ALWAYS do these:
-- Honor all three types: DO, KNOW, DREAM
+- **SCAN THE WIKI FIRST** - Search for related/duplicate content before processing
+- Honor all categories: DO, KNOW, DREAM, LAUGH, WONDER, IMAGINE, TRASH
+- Use Grep to search for keywords from the capture
+- Check multiple variations of search terms
+- Read related files to understand context before adding
 - Use rich tagging for someday/maybe items
 - Capture the energy and excitement of ideas
 - Connect dreams to values and long-term vision
@@ -622,6 +626,7 @@ Ready for the next item?"
 - Look for patterns across multiple someday/maybe captures
 - Celebrate the imagination behind wild ideas
 - Check if there's a tiny version that could start now
+- Be willing to discard the mediocre
 
 ## Success Metrics
 An inbox item is successfully processed when:
