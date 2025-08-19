@@ -171,6 +171,8 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "_agents/inbox-processor-agent.md",
+    "_agents",
     "_system/inbox-processor-agent.md",
     "_system/practical-sync-concerns.md",
     "_system/sync-edge-cases-and-testing.md",
@@ -204,8 +206,6 @@
     "04-Daily/2025-08-19.md",
     "04-daily/2025-08-19.md",
     "04-daily/2025-08-18.md",
-    "04-daily",
-    "02-areas/productivity/daily-routines.md",
-    "02-areas/personal/writing-style-guide.md"
+    "02-areas/productivity/daily-routines.md"
   ]
 }
