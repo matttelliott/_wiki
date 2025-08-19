@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-Daily/2025-08-18.md",
+                "file": "04-Daily/2025-08-19.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-08-18"
+              "title": "2025-08-19"
             }
           }
         ]
@@ -171,10 +171,11 @@
   },
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
+    "04-Daily/2025-08-18.md",
+    "04-Daily/2025-08-19.md",
     "_System/Generic Auto-Sync Guide.md",
     "_System/Sync Troubleshooting.md",
     "01-Projects/_Active/Home Network Infrastructure.md",
-    "04-Daily/2025-08-18.md",
     "02-Areas/Productivity/Daily Routines.md",
     "02-Areas/Personal/Writing Style Guide.md",
     "02-Areas/Personal/Goals and Values.md",
@@ -201,7 +202,6 @@
     "_System/GTD Overview.md",
     "05-Templates/Meeting Note.md",
     "05-Templates/Literature Note.md",
-    "05-Templates/Project.md",
     "_System",
     "06-Attachments",
     "05-Templates",
