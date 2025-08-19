@@ -171,6 +171,8 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "03-resources/references/claude-code-interfaces.md",
+    "03-resources/references/claude-cli.md",
     "03-resources/references/claude-code.md",
     "claude-code.md",
     "_system/sync-development-history.md",
@@ -204,8 +206,6 @@
     "02-areas/personal/things-i-don't-hate.md",
     "02-areas/personal/john-and-sara-wedding.md",
     "02-areas/personal/goals-and-values.md",
-    "02-areas/personal/about-me.md",
-    "02-areas/development/technical-stack.md",
-    "02-areas/development/coding-standards.md"
+    "02-areas/personal/about-me.md"
   ]
 }
