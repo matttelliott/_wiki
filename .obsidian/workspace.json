@@ -167,6 +167,7 @@
   },
   "active": "76d51b8a17c2466a",
   "lastOpenFiles": [
+    "conflict-test.md",
     "test-from-icloud.md",
     "test-from-local.md",
     "03-resources/references",
@@ -201,7 +202,6 @@
     "01-projects/_active/home-network-infrastructure.md",
     "01-projects/_active/claude-mastery.md",
     "01-projects/_active/ai-centered-dotfiles.md",
-    "01-projects-temp/_active/personal-wiki-system-evolution.md",
-    "01-projects-temp/_active/iphone-pomodoro-timer.md"
+    "01-projects-temp/_active/personal-wiki-system-evolution.md"
   ]
 }
