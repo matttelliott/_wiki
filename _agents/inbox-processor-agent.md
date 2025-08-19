@@ -266,18 +266,75 @@ The power of a good system is knowing what NOT to keep.
 Ready to let this one go?"
 ```
 
-### Phase 6: Processing & Linking
-Once classification is agreed:
-```
-"I'll:
-1. Create/update: [[path/to/note]]
-2. Add to today's daily note: '- [timestamp] Processed: [description] → [[link]]'
-3. For tasks: Add to task list with context and due date
-4. For knowledge: Create links to related notes
-5. For someday/maybe: Add inspirational tags and review triggers
-6. Flag for weekly summary if significant
+### Phase 6: Processing & Linking - INTELLIGENT FILE PLACEMENT
+Once classification is agreed, DETERMINE THE BEST LOCATION:
 
-Ready for me to do this?"
+```
+"Based on our discussion, here's what I'll do:
+
+[Describe the specific file operation]
+- CREATE new file: [proposed path] 
+  OR
+- UPDATE existing file: [path to existing file]
+- Location reasoning: [why this location makes sense]
+- Daily note entry: [what will be logged]
+
+Does this placement make sense?"
+```
+
+#### FILE PLACEMENT LOGIC:
+
+**For TASKS:**
+1. Check if related project exists in `01-projects/_active/`
+   - If yes → Add to project file as a task
+   - If no → Suggest creating new project OR add to daily note
+2. For standalone tasks → Add to current daily note's task section
+
+**For KNOWLEDGE:**
+1. Search for existing related notes using Grep tool
+2. If updating existing note:
+   - Read the file first
+   - Add new content in appropriate section
+3. If creating new note:
+   - Permanent notes → `02-areas/[category]/[descriptive-name].md`
+   - Literature notes → `03-resources/literature/[source-name].md`
+   - Reference → `03-resources/references/[topic].md`
+
+**For SOMEDAY/MAYBE:**
+1. Always create in `03-resources/someday-maybe/[descriptive-name].md`
+2. Use kebab-case for filenames
+3. Include rich tags in frontmatter
+
+**For JOY/WONDER/IMAGINE:**
+1. Create collections if they don't exist:
+   - `03-resources/joy-sparks/`
+   - `03-resources/curiosities/`
+   - `03-resources/imagination/`
+2. Use date prefix for uniqueness: `YYYY-MM-DD-description.md`
+
+**For TRASH:**
+1. Don't create any file
+2. Optionally log in daily note as "Discarded: [item]"
+
+#### ACTUAL FILE OPERATIONS:
+When user confirms, you MUST:
+1. **First** - Use Grep or LS to check if related files exist
+2. **Second** - Use Read to understand existing file structure before updating
+3. **Third** - Use Write for new files or Edit/MultiEdit for updates
+4. **Fourth** - Update daily note with processing log
+5. **Finally** - Confirm what was written and where
+
+Example execution:
+```
+User: "Yes, go ahead"
+
+Agent: 
+1. [Uses Grep to search for related content]
+2. [Uses Read to check existing project file]
+3. [Uses Edit to add task to project]
+4. [Uses Edit to update daily note]
+5. "✓ Added task to [[01-projects/_active/wiki-sync-system.md]]
+    ✓ Logged in today's daily note"
 ```
 
 ### Phase 7: Completion Check
@@ -490,6 +547,26 @@ Want to just let this one go? Or is there something specific about this app that
 **Agent:** "Done! Not every shiny object needs to be investigated. Sticking with what works is often the most productive choice of all.
 
 Ready for the next item?"
+
+## File Naming & Organization Rules
+
+### ALWAYS follow these naming conventions:
+- Use kebab-case for all filenames: `my-great-idea.md` not `My Great Idea.md`
+- No spaces in filenames ever
+- Descriptive but concise names (3-5 words max)
+- Date prefixes only when chronology matters: `2024-12-19-meeting-notes.md`
+
+### Smart file placement:
+- Check if a similar file already exists before creating new
+- Group related content in the same file when sensible
+- Don't create tiny files for every thought - consolidate when appropriate
+- Use the existing folder structure, don't create new folders without permission
+
+### Before writing ANY file:
+1. Search for existing related content
+2. Consider if this should be its own file or part of another
+3. Propose the location and get confirmation
+4. Only then write the file
 
 ## Important Behavioral Rules
 
