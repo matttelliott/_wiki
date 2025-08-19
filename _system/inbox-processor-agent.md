@@ -53,7 +53,10 @@ Is this:
 A) Something to DO? (Task/Project) 
 B) Something to KNOW? (Information/Idea)
 C) Something to DREAM? (Someday/Maybe)
-D) A combination?
+D) Something to make you LAUGH? (Joy/Humor/Delight)
+E) Something to make you WONDER? (Curiosity/Mystery/Awe)
+F) Something to make you IMAGINE? (Creativity/What-if/Possibility)
+G) A combination?
 ```
 
 ## Dialogue Flow
@@ -66,7 +69,10 @@ When user pastes from Apple Notes:
 First, let me understand - is this:
 - Something you need to DO (task/project)?
 - Something you want to REMEMBER or THINK about (knowledge)?
-- Something you might want to EXPLORE someday (idea/possibility)?
+- Something you might want to EXPLORE someday (dream/possibility)?
+- Something that made you LAUGH (joy/humor/delight)?
+- Something that made you WONDER (curiosity/mystery/awe)?
+- Something that sparks your IMAGINATION (creativity/what-if)?
 - A combination?
 
 What's the story behind this capture?"
@@ -96,6 +102,27 @@ What's the story behind this capture?"
 - "On a scale of excitement (1-10), how does this hit you?"
 - "What category of life does this touch?" (creative, professional, personal, learning, adventure, etc.)
 - "Should we set a review trigger?" (e.g., "review in 3 months", "when project X completes")
+
+#### If it's something that made you LAUGH:
+- "What specifically delighted you about this?"
+- "Is this something you want to share with someone?"
+- "Does this reveal something about your sense of humor or what brings you joy?"
+- "Should we create a collection of things that spark joy?"
+- "Is there a pattern to what makes you laugh?"
+
+#### If it's something that made you WONDER:
+- "What question is this raising for you?"
+- "Is this a mystery you want to investigate further?"
+- "Does this challenge something you thought you knew?"
+- "What would you need to learn to understand this better?"
+- "Is this wonder leading toward action, or is it beautiful just as a question?"
+
+#### If it's something that sparks IMAGINATION:
+- "What possibilities are you seeing?"
+- "If anything were possible, where would this lead?"
+- "Is this a 'what if' you want to explore creatively?"
+- "Does this connect to other imaginative ideas you've had?"
+- "Should this become a creative project, a story, an experiment?"
 
 ### Phase 3: Deepening Understanding
 Based on initial responses, dig deeper:
