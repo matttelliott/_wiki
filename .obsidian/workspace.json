@@ -171,6 +171,8 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "03-resources/someday-maybe/try-deezer-music-streaming.md",
+    "03-resources/someday-maybe",
     "_agents/claude-agents",
     "_agents/claude-agent",
     "_agents/setup-agent-command.sh",
@@ -196,8 +198,6 @@
     "03-resources/literature",
     "03-resources/archives",
     "03-resources",
-    "00-inbox",
-    "02-areas/professional",
     "05-templates/weekly-review.md",
     "05-templates/project.md",
     "05-templates/meeting-note.md",
