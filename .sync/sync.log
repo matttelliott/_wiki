@@ -117,11 +117,20 @@
 [2025-08-18 19:34:49] [icloud] Failed to reapply local changes - manual intervention needed
 [2025-08-18 19:36:30] [macos] Successfully pulled remote changes
 [2025-08-18 19:36:30] [macos] Failed to reapply local changes - manual intervention needed
+<<<<<<< HEAD
+[2025-08-18 19:40:39] [icloud] Pulling remote changes
+=======
 [2025-08-18 19:36:30] [macos] Committed changes: Auto-sync from macos: 2025-08-18 19:36:30
 [2025-08-18 19:36:31] [macos] Pushed changes to remote
 [2025-08-18 19:40:40] [icloud] Successfully pulled remote changes
 [2025-08-18 19:40:40] [icloud] Failed to reapply local changes - manual intervention needed
 [2025-08-18 19:41:32] [macos] Successfully pulled remote changes
 [2025-08-18 19:41:32] [macos] Failed to reapply local changes - manual intervention needed
+<<<<<<< HEAD
 [2025-08-18 19:41:32] [macos] Committed changes: Auto-sync from macos: 2025-08-18 19:41:32
 [2025-08-18 19:41:33] [macos] Pushed changes to remote
+=======
+>>>>>>> a3bae7fca1a8e9df1954256188ad410816dc613a
+[2025-08-18 19:43:22] [icloud] Sync failed - manual intervention needed
+[2025-08-18 19:43:22] [icloud] Push failed - will retry next sync
+>>>>>>> 51d53d33aa5896cd46b47d9324a0fe0453f4892c
