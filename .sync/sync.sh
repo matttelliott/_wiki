@@ -41,17 +41,9 @@ sync_repo() {
     local repo_name="$2"
     local is_icloud="$3"
     
-    # For iCloud, we can't CD due to macOS security - use git -C instead
-    if [[ "$repo_path" == *"iCloud"* ]]; then
-        GIT_CMD="git -C \"$repo_path\""
-    else
-        cd "$repo_path" || return 1
-        GIT_CMD="git"
-    fi
-    
     # Trigger iCloud download if needed (macOS only)
     if [ "$is_icloud" = "true" ] && [[ "$OSTYPE" == "darwin"* ]]; then
-        find . -type f -name "*.md" -exec head -c 1 {} \; > /dev/null 2>&1
+        find "$repo_path" -type f -name "*.md" -exec head -c 1 {} \; > /dev/null 2>&1
         sleep 2
     fi
     
@@ -75,41 +67,84 @@ sync_repo() {
         platform="${platform}-icloud"
     fi
     
-    # Stage and commit any changes
-    if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-        git add -A
-        git -c commit.gpgsign=false commit -m "Auto-sync from $platform: $(date '+%Y-%m-%d %H:%M:%S')" > /dev/null 2>&1
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Committed changes" >> "$LOG_DIR/sync.log"
-    fi
-    
-    # Try to fetch and merge
-    if git fetch origin main > /dev/null 2>&1; then
-        # Check if we need to merge
-        local_rev=$(git rev-parse HEAD)
-        remote_rev=$(git rev-parse origin/main)
+    # For iCloud, we can't CD due to macOS security - use git -C instead
+    if [[ "$repo_path" == *"iCloud"* ]]; then
+        # Stage and commit any changes
+        if ! git -C "$repo_path" diff --quiet || ! git -C "$repo_path" diff --cached --quiet || [ -n "$(git -C "$repo_path" ls-files --others --exclude-standard)" ]; then
+            git -C "$repo_path" add -A
+            git -C "$repo_path" -c commit.gpgsign=false commit -m "Auto-sync from $platform: $(date '+%Y-%m-%d %H:%M:%S')" > /dev/null 2>&1
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Committed changes" >> "$LOG_DIR/sync.log"
+        fi
         
-        if [ "$local_rev" != "$remote_rev" ]; then
-            # Try fast-forward or rebase
-            if git merge --ff-only origin/main > /dev/null 2>&1; then
-                echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Fast-forwarded to remote" >> "$LOG_DIR/sync.log"
-            elif git rebase origin/main > /dev/null 2>&1; then
-                echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Rebased onto remote" >> "$LOG_DIR/sync.log"
-            else
-                # Conflict - preserve in branch and reset
-                conflict_branch="conflict-${MACHINE_NAME}-$(date +%Y%m%d-%H%M%S)"
-                git rebase --abort > /dev/null 2>&1
-                git branch "$conflict_branch"
-                git reset --hard origin/main
-                echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Conflict preserved in branch: $conflict_branch" >> "$LOG_DIR/sync.log"
+        # Try to fetch and merge
+        if git -C "$repo_path" fetch origin main 2>/tmp/icloud-fetch-error.log; then
+            # Check if we need to merge
+            local_rev=$(git -C "$repo_path" rev-parse HEAD)
+            remote_rev=$(git -C "$repo_path" rev-parse origin/main)
+            
+            if [ "$local_rev" != "$remote_rev" ]; then
+                # Try fast-forward or rebase
+                if git -C "$repo_path" merge --ff-only origin/main > /dev/null 2>&1; then
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Fast-forwarded to remote" >> "$LOG_DIR/sync.log"
+                elif git -C "$repo_path" rebase origin/main > /dev/null 2>&1; then
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Rebased onto remote" >> "$LOG_DIR/sync.log"
+                else
+                    # Conflict - preserve in branch and reset
+                    conflict_branch="conflict-${MACHINE_NAME}-$(date +%Y%m%d-%H%M%S)"
+                    git -C "$repo_path" rebase --abort > /dev/null 2>&1
+                    git -C "$repo_path" branch "$conflict_branch"
+                    git -C "$repo_path" reset --hard origin/main
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Conflict preserved in branch: $conflict_branch" >> "$LOG_DIR/sync.log"
+                fi
             fi
+        else
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Failed to fetch from remote" >> "$LOG_DIR/sync.log"
+        fi
+        
+        # Push changes
+        if git -C "$repo_path" push origin main > /dev/null 2>&1; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Pushed to remote" >> "$LOG_DIR/sync.log"
         fi
     else
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Failed to fetch from remote" >> "$LOG_DIR/sync.log"
-    fi
-    
-    # Push changes
-    if git push origin main > /dev/null 2>&1; then
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Pushed to remote" >> "$LOG_DIR/sync.log"
+        # For local repos, we can CD normally
+        cd "$repo_path" || return 1
+        
+        # Stage and commit any changes
+        if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git add -A
+            git -c commit.gpgsign=false commit -m "Auto-sync from $platform: $(date '+%Y-%m-%d %H:%M:%S')" > /dev/null 2>&1
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Committed changes" >> "$LOG_DIR/sync.log"
+        fi
+        
+        # Try to fetch and merge
+        if git fetch origin main > /dev/null 2>&1; then
+            # Check if we need to merge
+            local_rev=$(git rev-parse HEAD)
+            remote_rev=$(git rev-parse origin/main)
+            
+            if [ "$local_rev" != "$remote_rev" ]; then
+                # Try fast-forward or rebase
+                if git merge --ff-only origin/main > /dev/null 2>&1; then
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Fast-forwarded to remote" >> "$LOG_DIR/sync.log"
+                elif git rebase origin/main > /dev/null 2>&1; then
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Rebased onto remote" >> "$LOG_DIR/sync.log"
+                else
+                    # Conflict - preserve in branch and reset
+                    conflict_branch="conflict-${MACHINE_NAME}-$(date +%Y%m%d-%H%M%S)"
+                    git rebase --abort > /dev/null 2>&1
+                    git branch "$conflict_branch"
+                    git reset --hard origin/main
+                    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Conflict preserved in branch: $conflict_branch" >> "$LOG_DIR/sync.log"
+                fi
+            fi
+        else
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Failed to fetch from remote" >> "$LOG_DIR/sync.log"
+        fi
+        
+        # Push changes
+        if git push origin main > /dev/null 2>&1; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$platform] Pushed to remote" >> "$LOG_DIR/sync.log"
+        fi
     fi
 }
 
