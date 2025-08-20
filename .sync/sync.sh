@@ -41,7 +41,13 @@ sync_repo() {
     local repo_name="$2"
     local is_icloud="$3"
     
-    cd "$repo_path" || return 1
+    # For iCloud, we can't CD due to macOS security - use git -C instead
+    if [[ "$repo_path" == *"iCloud"* ]]; then
+        GIT_CMD="git -C \"$repo_path\""
+    else
+        cd "$repo_path" || return 1
+        GIT_CMD="git"
+    fi
     
     # Trigger iCloud download if needed (macOS only)
     if [ "$is_icloud" = "true" ] && [[ "$OSTYPE" == "darwin"* ]]; then
