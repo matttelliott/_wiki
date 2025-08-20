@@ -171,6 +171,7 @@
   },
   "active": "c2bf7e89ccd88606",
   "lastOpenFiles": [
+    "test-conflict.md",
     "test-macos-to-icloud.md",
     "sync-test-2025-08-19.md",
     "macos.temp",
@@ -205,7 +206,6 @@
     "05-templates/weekly-review.md",
     "05-templates/project.md",
     "05-templates/meeting-note.md",
-    "05-templates/literature-note.md",
-    "05-templates/idea-capture.md"
+    "05-templates/literature-note.md"
   ]
 }
