@@ -22,11 +22,13 @@ Maintain and troubleshoot the wiki's git-based bidirectional sync system across 
 
 ## Key Knowledge
 
-### System Architecture
-- **Three separate git repos**: local (~/_wiki), iCloud, GitHub (central)
-- **Bidirectional sync**: Runs every 5 minutes via launchd
-- **Conflict strategy**: Preserves both versions in timestamped branches
-- **Platform detection**: Uses path and OSTYPE for commit identification
+### System Architecture (Updated 2025-08-19)
+- **Three separate git repos**: local (~/_wiki), iCloud (macOS only), GitHub (central)
+- **Single sync.sh script**: Handles all logic (replaced 8 scripts)
+- **Bidirectional sync**: Runs every 5 minutes via launchd/systemd/cron
+- **Conflict strategy**: Preserves both versions in branches named `conflict-HOSTNAME-timestamp`
+- **Platform detection**: Uses hostname + OS type for unique machine identification
+- **Commit format**: "Auto-sync from hostname-OS[-icloud]: timestamp"
 
 ### Critical Issues Solved
 1. **iPhone edits lost**: Fixed by committing BEFORE pulling
@@ -40,21 +42,28 @@ Maintain and troubleshoot the wiki's git-based bidirectional sync system across 
 
 ### Essential Commands
 ```bash
-# Check sync status
+# Check sync status (comprehensive health check)
 ~/_wiki/.sync/sync-status.sh
+
+# Manual sync
+~/_wiki/.sync/sync.sh
+
+# Setup/reinstall sync
+~/_wiki/.sync/sync-setup.sh
+
+# Check logs
+tail -50 ~/_wiki/.sync/sync.log
+tail -50 ~/_wiki/.sync/bidirectional.log
 
 # Review conflicts
 git branch | grep conflict-
-~/_wiki/.sync/conflict-review.sh
-
-# Check logs
-tail -50 ~/.sync/sync.log
-
-# Manual sync if needed
-~/_wiki/.sync/bidirectional-sync.sh
 
 # Service status
-launchctl list | grep wiki-bidirectional
+# macOS:
+launchctl list | grep wiki
+# Linux:
+systemctl --user status wiki-sync.timer
+crontab -l | grep wiki
 ```
 
 ## Documentation Updates
@@ -104,9 +113,16 @@ git status
 git stash  # if needed
 git reset --hard origin/main
 
-# Restart service
-launchctl unload ~/Library/LaunchAgents/com.user.wiki-bidirectional.plist
-launchctl load ~/Library/LaunchAgents/com.user.wiki-bidirectional.plist
+# Restart service (macOS)
+launchctl unload ~/Library/LaunchAgents/com.user.wiki-sync.plist 2>/dev/null
+launchctl unload ~/Library/LaunchAgents/com.user.wiki-bidirectional.plist 2>/dev/null
+launchctl load ~/Library/LaunchAgents/com.user.wiki-sync.plist 2>/dev/null
+
+# Restart service (Linux)
+systemctl --user restart wiki-sync.timer
+
+# Or just reinstall cleanly:
+~/_wiki/.sync/sync-setup.sh
 ```
 
 ## Success Metrics

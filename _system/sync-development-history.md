@@ -102,12 +102,28 @@ Initial: 6 separate scripts
 ├── wiki-sync-all.sh
 └── setup-sync.sh
 
-Final: 4 core scripts
+Intermediate: 8 scripts (too complex)
 ├── auto-sync.sh (generic, reusable)
+├── auto-sync-with-conflicts.sh
 ├── bidirectional-sync.sh (orchestrator)
 ├── handle-conflicts.sh (branch preservation)
-└── conflict-review.sh (resolution tool)
+├── conflict-review.sh (resolution tool)
+├── install-auto-sync.sh
+├── setup-sync.sh
+└── sync-status.sh
+
+Final: 3 clean scripts (2025-08-19)
+├── sync.sh (all sync logic, conflict handling, multi-platform)
+├── sync-setup.sh (installs launchd/systemd/cron)
+└── sync-status.sh (health check and diagnostics)
 ```
+
+### Key Improvement (2025-08-19)
+- Consolidated 8 scripts down to 3
+- Added unique machine names in commits (hostname-OS-location)
+- Supports multiple machines of same OS type
+- Single sync.sh handles everything (bidirectional, conflicts, iCloud)
+- Works on macOS (with iCloud), Linux, and Windows (WSL)
 
 ### Testing Log
 
